@@ -155,6 +155,55 @@ document.getElementById("contact-form").addEventListener("submit", function(even
 window.onload = function() {
     document.getElementById("contact-form").reset();
   }
+
+  window.addEventListener('load', setPortfolioBoxHeight);
+
+  // Check if the screen is at least 768 pixels wide
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
+  if (mediaQuery.matches) {
+    // Get an array of all the service boxes
+    const serviceBoxes = document.querySelectorAll('.services-container .services-box');
+
+    // Get the number of boxes per row
+    const containerWidth = document.querySelector('.services-container').offsetWidth;
+    const boxWidth = serviceBoxes[0].offsetWidth;
+    const boxesPerRow = Math.floor(containerWidth / boxWidth);
+
+    // Get the height of the tallest service box in each row
+    let tallestBoxes = [];
+    for (let i = 0; i < serviceBoxes.length; i += boxesPerRow) {
+      let maxHeight = 0;
+      for (let j = i; j < i + boxesPerRow; j++) {
+        if (j < serviceBoxes.length) {
+          const boxHeight = serviceBoxes[j].getBoundingClientRect().height;
+          if (boxHeight > maxHeight) {
+            maxHeight = boxHeight;
+          }
+        }
+      }
+      tallestBoxes.push(maxHeight);
+    }
+
+    // Set the height of the service boxes in each row to the height of the tallest box in that row
+    for (let i = 0; i < serviceBoxes.length; i++) {
+      const row = Math.floor(i / boxesPerRow);
+      serviceBoxes[i].style.height = `${tallestBoxes[row]}px`;
+    }
+  }
+
+  function setPortfolioBoxHeight() {
+    const portfolioBoxes = document.querySelectorAll('.portfolio-box');
+    let smallestHeight = Infinity;
+    for (let i = 0; i < portfolioBoxes.length; i++) {
+      const height = portfolioBoxes[i].getBoundingClientRect().height;
+      if (height < smallestHeight) {
+        smallestHeight = height;
+      }
+    }
+    for (let i = 0; i < portfolioBoxes.length; i++) {
+      portfolioBoxes[i].style.height = `${smallestHeight}px`;
+    }
+  }
   
 
 
