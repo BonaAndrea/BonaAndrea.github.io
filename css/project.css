@@ -144,6 +144,19 @@ span {
   font-size: 1.6rem;
 }
 
+.project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
 @media (max-width: 1000px) {
   .slides-container {
     width: 90vw;
