@@ -167,6 +167,9 @@ span {
     align-items: center;
     justify-content: space-around;
   }
+    .project-content p {
+    width: 90vw;
+    margin: 3.5rem auto;
+    } 
+  }
 
-
-}
