@@ -472,6 +472,22 @@ span {
         display: block;
     }
 
+    .about-img img{
+        width: 70vw;
+    }
+
+    .home-text {
+        margin: 0 0px 0 -5px;
+    }
+
+    .home-text .h3{
+        font-size: 20px;
+    }
+
+    .home-text .multiple-text {
+        font-size: 20px; /* or any value that suits your design */
+      }
+
     .navbar{
         position: absolute;
         top: 100%;
