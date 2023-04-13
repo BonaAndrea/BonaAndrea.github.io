@@ -150,13 +150,29 @@ document.getElementById("contact-form").addEventListener("submit", function(even
 
     }
 });
+// Call the setPortfolioBoxHeight function when the page first loads
+window.addEventListener('load', setPortfolioBoxHeight);
 
 window.onload = function() {
     document.getElementById("contact-form").reset();
+    setTimeout(function() {
+      setPortfolioBoxHeight();
+    }, 500); // set the delay to 500ms (adjust as necessary)
+  };
+  
+  function setPortfolioBoxHeight() {
+    const portfolioBoxes = document.querySelectorAll('.portfolio-box');
+    let smallestHeight = Infinity;
+    for (let i = 0; i < portfolioBoxes.length; i++) {
+      const height = portfolioBoxes[i].getBoundingClientRect().height;
+      if (height < smallestHeight) {
+        smallestHeight = height;
+      }
+    }
+    for (let i = 0; i < portfolioBoxes.length; i++) {
+      portfolioBoxes[i].style.height = `${smallestHeight}px`;
+    }
   }
-
-  window.addEventListener('load', setPortfolioBoxHeight);
-
   // Check if the screen is at least 768 pixels wide
   const mediaQuery = window.matchMedia('(min-width: 768px)');
   if (mediaQuery.matches) {
