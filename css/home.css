@@ -212,7 +212,20 @@ span {
     gap: 2rem;
 }
 
+/*.services-container .services-box {
+    flex: 1 1 50rem;
+    background: var(--second-bg-color);
+    padding: 3rem 2rem 4rem;
+    border-radius: 2rem;
+    text-align: center;
+    border: .2rem solid var(--bg-color);
+    transition: .5s ease;
+}*/
+
 .services-container .services-box {
+    /* Aggiungi questa proprietà per limitare la larghezza massima del contenuto */
+    max-width: 50rem;
+    /* Il resto del tuo codice CSS rimane invariato */
     flex: 1 1 50rem;
     background: var(--second-bg-color);
     padding: 3rem 2rem 4rem;
@@ -221,6 +234,7 @@ span {
     border: .2rem solid var(--bg-color);
     transition: .5s ease;
 }
+
 
 .services-container .services-box:hover{
     border-color: var(--main-color);

@@ -206,19 +206,5 @@ window.onload = function() {
     }
   }
 
-  function setPortfolioBoxHeight() {
-    const portfolioBoxes = document.querySelectorAll('.portfolio-box');
-    let smallestHeight = Infinity;
-    for (let i = 0; i < portfolioBoxes.length; i++) {
-      const height = portfolioBoxes[i].getBoundingClientRect().height;
-      if (height < smallestHeight) {
-        smallestHeight = height;
-      }
-    }
-    for (let i = 0; i < portfolioBoxes.length; i++) {
-      portfolioBoxes[i].style.height = `${smallestHeight}px`;
-    }
-  }
-  
 
 
