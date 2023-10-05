@@ -206,18 +206,7 @@ window.onload = function() {
     }
   }
 
-  function toggleExtraText() {
-    var extraText = document.getElementById('extra-text');
-    extraText.classList.toggle('visible');
 
-    var buttonText = document.querySelector('#about .btn');
-
-    if (extraText.classList.contains('visible')) {
-        buttonText.innerText = 'Close';
-    } else {
-        buttonText.innerText = 'Read More';
-    }
-}
 
 
 
