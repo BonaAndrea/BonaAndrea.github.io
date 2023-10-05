@@ -212,6 +212,22 @@ span {
     gap: 2rem;
 }
 
+.hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.visible {
+    opacity: 1;
+    max-height: 1000px;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+
+
+
 /*.services-container .services-box {
     flex: 1 1 50rem;
     background: var(--second-bg-color);
