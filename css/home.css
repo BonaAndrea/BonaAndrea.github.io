@@ -226,18 +226,6 @@ span {
 }
 
 
-
-
-/*.services-container .services-box {
-    flex: 1 1 50rem;
-    background: var(--second-bg-color);
-    padding: 3rem 2rem 4rem;
-    border-radius: 2rem;
-    text-align: center;
-    border: .2rem solid var(--bg-color);
-    transition: .5s ease;
-}*/
-
 .services-container .services-box {
     /* Aggiungi questa proprietà per limitare la larghezza massima del contenuto */
     max-width: 50rem;
@@ -283,7 +271,7 @@ span {
 }
 
 .portfolio{
-    background: var(--second-bg-color);
+    background: var(--bg-color);
 }
 
 .portfolio h2{
@@ -379,6 +367,107 @@ span {
     color: var(--second-bg-color);
 }
 
+.demos {
+    background: var(--second-bg-color);
+}
+
+.demos h2 {
+    margin-bottom: 4rem;
+}
+
+.demos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.demos-container .demos-box {
+    position: relative;
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem var(--bg-color);
+    overflow: hidden;
+    display: flex;
+}
+
+.demos-box img {
+    width: 100%;
+    transition: .5s ease;
+}
+
+.demos-layer h4 {
+    color: var(--main-color);
+}
+
+.demos-box .demos-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, .1), var(--second-bg-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 4rem;
+    transform: translateY(100%);
+    transition: .5s ease;
+}
+
+.demos-box:hover .demos-layer {
+    transform: translateY(0);
+}
+
+.demos-box img:hover {
+    transform: scale(1.1);
+}
+
+.demos-layer h4 {
+    font-size: 2.5rem;
+}
+
+.demos-box a {
+    transition: .5s ease;
+}
+
+.demos-box a:hover {
+    background: var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.demos-box i {
+    transition: .5s ease;
+}
+
+.demos-box a:hover i {
+    color: var(--text-color);
+}
+
+.demos-layer p {
+    font-size: 1.6rem;
+    margin: .3rem 0 1rem;
+}
+
+.demos-layer a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: var(--text-color);
+    border-radius: 50%;
+}
+
+.demos-layer a i {
+    font-size: 2rem;
+    color: var(--second-bg-color);
+}
+
+.contact {
+    background: var(--second-bg-color);
+}
 
 .contact h2{
     margin-bottom: 3rem;
@@ -403,7 +492,7 @@ span {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--second-bg-color);
+    background: var(--bg-color);
     border-radius: .8rem;
     margin: .7rem 0;
 }
@@ -413,7 +502,7 @@ span {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--second-bg-color);
+    background: var(--bg-color);
     border-radius: .8rem;
     margin: .7rem 0;
 }
@@ -438,7 +527,7 @@ span {
     align-items: center;
     flex-wrap: wrap;
     padding: 2rem 9%;
-    background: var(--second-bg-color);
+    background: var(--bg-color);
 }
 
 .footer-text p{
@@ -481,6 +570,10 @@ span {
     }
 
     .portfolio{
+        padding-bottom: 7rem;
+    }
+
+    .demos{
         padding-bottom: 7rem;
     }
 
@@ -578,11 +671,22 @@ span {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .demos h2{
+        margin-bottom: 3rem;
+    }
+
+    .demos-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
 }
 
 
 @media (max-width: 617px){
     .portfolio-container{
+        grid-template-columns: 1fr;
+    }
+    .demos-container{
         grid-template-columns: 1fr;
     }
 }

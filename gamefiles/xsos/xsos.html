@@ -1,40 +1,108 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Xs_Os_Xs_Os</title>
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #231F20"></canvas>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X's & O's - Demo - Portfolio - Andrea Bona</title>
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <!-- box icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- custom css -->
+    <!-- Unity WebGL Player styles -->
+    <style>
+        body {
+            text-align: center;
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+        #unity-canvas {
+            width: 960px;
+            height: 600px;
+            background: #231F20;
+        }
+    </style>
+        <!-- custom css -->
+        <link rel="stylesheet" href="../../css/game.css" />
+        <link rel="stylesheet" href="../../css/home.css" />
+</head>
+<body>
+    <!-- header design -->
+    <header class="header">
+      <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
+
+      <i class="bx bx-menu" id="menu-icon"></i>
+
+      <nav class="navbar">
+        <a href="../../index.html#home">Home</a>
+        <a href="../../index.html#about">About</a>
+        <a href="../../index.html#services">Skills</a>
+        <a href="../../index.html#demos" class="active">Demos</a>
+        <a href="../../index.html#portfolio">Projects</a>
+        <a href="../../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="demo" id="demo">
+      <div class="demo-content">
+          <div class="demo-text">
+          <h1>X's & O's & X's & O's</h1>
+      </div>
+      </div>
+
+    <!-- Unity WebGL Player canvas -->
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+    <!-- footer design -->
+    <footer class="demo-footer">
+      <div class="footer-text">
+        <p>Copyright &copy; 2023 by Andrea Bona | All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Unity WebGL Player script -->
     <script src="Build/WebGL.loader.js"></script>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        // Check if it's a mobile device
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.head.appendChild(meta);
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+            var canvas = document.querySelector("#unity-canvas");
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.position = "fixed";
 
-        document.body.style.textAlign = "left";
-      }
+            document.body.style.textAlign = "left";
+        }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/WebGL.data.unityweb",
-        frameworkUrl: "Build/WebGL.framework.js.unityweb",
-        codeUrl: "Build/WebGL.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "BonaAndrea",
-        productName: "Xs_Os_Xs_Os",
-        productVersion: "1.0.2",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/WebGL.data.unityweb",
+            frameworkUrl: "Build/WebGL.framework.js.unityweb",
+            codeUrl: "Build/WebGL.wasm.unityweb",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "BonaAndrea",
+            productName: "Xs_Os_Xs_Os",
+            productVersion: "1.0.2"
+        });
     </script>
-  </body>
+
+<div class="demo-content">
+  <div class="demo-text">
+      <p>In this project, I challenged myself with the task to <span>design a mobile experience</span>. As simple as it might seem, coming up with the idea, <span>expanding</span> the original Tic-Tac-Toe, and working to implement it, was a very enriching experience. I especially tried to focus on the <span>structure of the code</span>, working on it in a way to ensure it's expandability in the future and using a <span>model-view-controller</span> implementation.</p>
+  </div>
+  <div class="btn-container">
+      <a href="https://github.com/BonaAndrea/Xs-Os-Xs-Os" target="_blank" class="btn github-icon">
+          <i class='bx bxl-github'></i>
+              </a>
+  </div>
+</div>
+
+</section>
+
+
+</body>
 </html>
