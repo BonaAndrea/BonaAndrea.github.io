@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pandemood - Demo - Portfolio - Andrea Bona</title>
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-    <!-- box icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <!-- custom css -->
-    <!-- Unity WebGL Player styles -->
     <style>
         body {
             text-align: center;
@@ -23,7 +20,6 @@
             background: #231F20;
         }
     </style>
-        <!-- custom css -->
         <link rel="stylesheet" href="../../css/game.css" />
         <link rel="stylesheet" href="../../css/home.css" />
         <script>
@@ -37,26 +33,18 @@
           }
         </script>
 </head>
-<body>
-  <script src="Build/Build.loader.js"></script>
-  <script>
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      document.querySelector("#unity-canvas").style.display = "none";
-    }
-
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Build.data",
-        frameworkUrl: "Build/Build.framework.js",
-        codeUrl: "Build/Build.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Bugstards",
-        productName: "Pandemood",
-        productVersion: "0.8",
+<body onload="createUnityInstance(document.querySelector('#unity-canvas'), {
+        dataUrl: 'Build/Build.data',
+        frameworkUrl: 'Build/Build.framework.js',
+        codeUrl: 'Build/Build.wasm',
+        streamingAssetsUrl: 'StreamingAssets',
+        companyName: 'Bugstards',
+        productName: 'Pandemood',
+        productVersion: '0.8',
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
-    </script>
-    <!-- header design -->
+      });">
+  <script src="Build/Build.loader.js"></script>
     <header class="header">
       <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
 
@@ -79,28 +67,10 @@
       </div>
       </div>
 
-    <!-- Unity WebGL Player canvas -->
     <canvas id="unity-canvas" tabindex="-1"></canvas>
 
-    <!-- footer design -->
     <footer class="demo-footer">
       <div class="footer-text">
         <p>Copyright &copy; 2023 by Andrea Bona | All Rights Reserved.</p>
       </div>
     </footer>
-
-    <!-- Unity WebGL Player script -->
-    
-
-<div class="demo-content">
-  <div class="demo-text">
-    <p>During the Game Design course at PoliTo, I was part of a 6-person team that developed Pandemood, a puzzle-platformer set in a post-Covid world. The game aims to help players understand the importance of emotions. As the <span>gameplay developer</span>, I worked on the implementation of the <span>gameplay mechanics</span>, ensured a fun and precise experience, while also working on the <span>UI</span>, with a focus on the <span>dialogue system</span>. The game is here available in a <span>demo format</span> where the first two levels are playable. Make sure to <span>download</span> the Windows build to experience the full adventure!</p>
-  </div>
-  <div class="btn-container"><a href="https://bugstards.itch.io/pandemood" target="_blank" class="btn">Download</a> </div>       </div>
-</div>
-
-</section>
-
-
-</body>
-</html>
