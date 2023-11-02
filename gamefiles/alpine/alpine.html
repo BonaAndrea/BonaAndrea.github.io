@@ -7,6 +7,7 @@
     <title>Alpine Rescue 2.0 | Andrea Bona</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script src="Build/WebGL.loader.js"></script>
     <style>
       body {
           text-align: center;
@@ -22,26 +23,7 @@
   </style>
       <link rel="stylesheet" href="../../css/game.css" />
       <link rel="stylesheet" href="../../css/home.css" />
-      <script>
-          // Check if the user is on a desktop device.
-          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            // Display a message that the game is not compatible with the current platform.
-            alert("Alpine Rescue 2.0 is not compatible with this platform.");
-    
-            // Hide the demo canvas.
-            document.querySelector("#unity-canvas").style.display = "none";
-          }
-        </script>
   </head>
-  <body onload="createUnityInstance(document.querySelector('#unity-canvas'), {
-        dataUrl: 'Build/Build.data',
-        frameworkUrl: 'Build/Build.framework.js',
-        codeUrl: 'Build/Build.wasm',
-        streamingAssetsUrl: 'StreamingAssets',
-        companyName: 'AndreaBonaGames',
-        productName: 'Soccorso Alpino Simulator 2.0',
-        productVersion: '0.1.0',
-      });">
   <header class="header">
     <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
 
@@ -56,13 +38,13 @@
       <a href="../../index.html#contact">Contact</a>
     </nav>
 </header>
+<body>
   <section class="demo" id="demo">
   <div class="demo-content">
           <div class="demo-text">
           <h1>Alpine Rescue 2.0</h1>
       </div>
   </div>
-
   <canvas id="unity-canvas" tabindex="-1"></canvas>
 
   <div class="demo-content">
@@ -70,7 +52,28 @@
   </div>
     <div class="btn-container">
     <a href="https://github.com/BonaAndrea/Alpine-Rescue-2.0" target="_blank" class="btn github-icon">
-        <i class='bx bxl-github'></i>
-            </a>
-</div>
+        <i class='bx bxl-github'></i> </a></div>
+<script>
 
+// Check if the user is on a desktop device.
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+// Display a message that the game is not compatible with the current platform.
+alert("Alpine Rescue 2.0 is not compatible with this platform.");
+
+// Hide the demo canvas.
+document.querySelector("#unity-canvas").style.display = "none";
+} else {
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/c3f220851a40e3ace400f8d69168219a.data.unityweb",
+        frameworkUrl: "Build/10afbb97b9448645790f596d39738fca.js.unityweb",
+        codeUrl: "Build/279ca2d26e4c67eb647b892bb85d4df7.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "AndreaBonaGames",
+        productName: "Soccorso-Alpino-Simulator-2.0",
+        productVersion: "0.1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    }
+    </script>
+</body>
