@@ -22,6 +22,7 @@
     </style>
         <link rel="stylesheet" href="../../css/game.css" />
         <link rel="stylesheet" href="../../css/home.css" />
+        <script src="Build/Smaller.loader.js"></script>
         <script>
           // Check if the user is on a desktop device.
           if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -33,17 +34,6 @@
           }
         </script>
 </head>
-<body onload="createUnityInstance(document.querySelector('#unity-canvas'), {
-        dataUrl: 'Build/Build.data',
-        frameworkUrl: 'Build/Build.framework.js',
-        codeUrl: 'Build/Build.wasm',
-        streamingAssetsUrl: 'StreamingAssets',
-        companyName: 'Bugstards',
-        productName: 'Pandemood',
-        productVersion: '0.8',
-      });">
-  <script src="Build/Build.loader.js"></script>
-
   <header class="header">
     <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
 
@@ -65,6 +55,21 @@
       </div>
   </div>
 
+  <body>
+    <script>
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/d87a6ef9b5c1a9975ce6ffba8d95f07f.data.unityweb",
+      frameworkUrl: "Build/48623a358e2c37f1ba9581c7d6d61feb.js.unityweb",
+      codeUrl: "Build/078d4c48eaa6d48b928e7729c3ed1bc0.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Bugstards",
+      productName: "Pandemood",
+      productVersion: "0.8",
+      // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+      // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+    });
+    </script>
+  </body>
   <canvas id="unity-canvas" tabindex="-1"></canvas>
 
   <div class="demo-content">
