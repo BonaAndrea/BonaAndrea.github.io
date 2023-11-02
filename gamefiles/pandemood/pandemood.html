@@ -23,16 +23,6 @@
         <link rel="stylesheet" href="../../css/game.css" />
         <link rel="stylesheet" href="../../css/home.css" />
         <script src="Build/Smaller.loader.js"></script>
-        <script>
-          // Check if the user is on a desktop device.
-          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            // Display a message that the game is not compatible with the current platform.
-            alert("Pandemood is not compatible with this platform.");
-    
-            // Hide the demo canvas.
-            document.querySelector("#unity-canvas").style.display = "none";
-          }
-        </script>
 </head>
   <header class="header">
     <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
@@ -56,20 +46,6 @@
   </div>
 
   <body>
-    <script>
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-      dataUrl: "Build/d87a6ef9b5c1a9975ce6ffba8d95f07f.data.unityweb",
-      frameworkUrl: "Build/48623a358e2c37f1ba9581c7d6d61feb.js.unityweb",
-      codeUrl: "Build/078d4c48eaa6d48b928e7729c3ed1bc0.wasm.unityweb",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Bugstards",
-      productName: "Pandemood",
-      productVersion: "0.8",
-      // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-      // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-    });
-    </script>
-  </body>
   <canvas id="unity-canvas" tabindex="-1"></canvas>
 
   <div class="demo-content">
@@ -79,6 +55,31 @@
   <div class="btn-container">
         <a href="https://bugstards.itch.io/pandemood" target="_blank" class="btn">Download</a>
   </div>
+
+  <script>
+    // Check if the user is on a desktop device.
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      // Display a message that the game is not compatible with the current platform.
+      alert("Pandemood is not compatible with this platform.");
+
+      // Hide the demo canvas.
+      document.querySelector("#unity-canvas").style.display = "none";
+    }
+    else {
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/d87a6ef9b5c1a9975ce6ffba8d95f07f.data.unityweb",
+      frameworkUrl: "Build/48623a358e2c37f1ba9581c7d6d61feb.js.unityweb",
+      codeUrl: "Build/078d4c48eaa6d48b928e7729c3ed1bc0.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Bugstards",
+      productName: "Pandemood",
+      productVersion: "0.8",
+      // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+      // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    }
+  </script>
+
 
   <footer class="demo-footer">
       <div class="footer-text">
