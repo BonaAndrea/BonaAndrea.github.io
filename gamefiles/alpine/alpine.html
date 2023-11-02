@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Rescue 2.0 | Andrea Bona</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <style>
+      body {
+          text-align: center;
+          padding: 0;
+          border: 0;
+          margin: 0;
+      }
+      #unity-canvas {
+          width: 960px;
+          height: 600px;
+          background: #231F20;
+      }
+  </style>
+      <link rel="stylesheet" href="../../css/game.css" />
+      <link rel="stylesheet" href="../../css/home.css" />
+      <script>
+          // Check if the user is on a desktop device.
+          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            // Display a message that the game is not compatible with the current platform.
+            alert("Alpine Rescue 2.0 is not compatible with this platform.");
+    
+            // Hide the demo canvas.
+            document.querySelector("#unity-canvas").style.display = "none";
+          }
+        </script>
+  </head>
+  <body onload="createUnityInstance(document.querySelector('#unity-canvas'), {
+        dataUrl: 'Build/Build.data',
+        frameworkUrl: 'Build/Build.framework.js',
+        codeUrl: 'Build/Build.wasm',
+        streamingAssetsUrl: 'StreamingAssets',
+        companyName: 'AndreaBonaGames',
+        productName: 'Soccorso Alpino Simulator 2.0',
+        productVersion: '0.1.0',
+      });">
+  <header class="header">
+    <a href="../../index.html#demos" class="logo"><i class="bx bx-arrow-back"></i></a>
+
+    <i class="bx bx-menu" id="menu-icon"></i>
+
+    <nav class="navbar">
+      <a href="../../index.html#home">Home</a>
+      <a href="../../index.html#about">About</a>
+      <a href="../../index.html#services">Skills</a>
+      <a href="../../index.html#demos" class="active">Demos</a>
+      <a href="../../index.html#portfolio">Projects</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+</header>
+  <section class="demo" id="demo">
+  <div class="demo-content">
+          <div class="demo-text">
+          <h1>Alpine Rescue 2.0</h1>
+      </div>
+  </div>
+
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+  <div class="demo-content">
+    <p>In an effort to keep my projects alive and up to date, I'm working on a remake of the Alpine Rescue project. I'm focusing on updating the <span>visual effects</span>, working on <span>better implementation</span> of the gameplay mechanics while preserving the original feeling of the game. I'm also improving heavily on the <span>optimization</span> of the app. The project is currently ongoing and in progress. <br><br><span>Please note:</span> the demo presented here had to be scaled down in order to work with WebGL. Therefore, bugs and grafical glitches might appear. It is strongly advised to play the full version of the game.</p>
+  </div>
+    <div class="btn-container">
+    <a href="https://github.com/BonaAndrea/Alpine-Rescue-2.0" target="_blank" class="btn github-icon">
+        <i class='bx bxl-github'></i>
+            </a>
+</div>
+
