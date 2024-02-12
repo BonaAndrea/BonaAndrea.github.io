@@ -81,9 +81,15 @@
     <!-- footer design -->
     <footer class="project-footer">
       <div class="footer-text">
-        <p>Copyright &copy; 2023 by Andrea Bona | All Rights Reserved.</p>
+          <p>Copyright &copy; <span id="currentYearProject"></span> by Andrea Bona | All Rights Reserved.</p>
       </div>
-    </footer>
+  
+      <script>
+          document.getElementById("currentYearProject").innerHTML = new Date().getFullYear();
+      </script>
+  </footer>
+  
+  
 
     <!-- scroll reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
