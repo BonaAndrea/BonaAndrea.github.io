@@ -213,7 +213,7 @@ window.onload = function() {
   }
   document.addEventListener("DOMContentLoaded", function () {
     // URL del feed RSS
-    var rssFeedUrl = 'https://andreabonagames.wordpress.com/feed';
+    var rssFeedUrl = 'https://cors-anywhere.herokuapp.com/https://andreabonagames.wordpress.com/feed';
 
 
     // Funzione per ottenere e visualizzare i post del blog
