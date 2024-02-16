@@ -507,8 +507,9 @@ span {
     color: var(--second-bg-color);
 }
 
+
 .contact {
-    background: var(--second-bg-color);
+    background: var(--bg-color);
 }
 
 .contact h2{
@@ -534,7 +535,7 @@ span {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--bg-color);
+    background: var(--second-bg-color);
     border-radius: .8rem;
     margin: .7rem 0;
 }
@@ -544,7 +545,7 @@ span {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--bg-color);
+    background: var(--second-bg-color);
     border-radius: .8rem;
     margin: .7rem 0;
 }
@@ -569,7 +570,7 @@ span {
     align-items: center;
     flex-wrap: wrap;
     padding: 2rem 9%;
-    background: var(--bg-color);
+    background: var(--second-bg-color);
 }
 
 .footer-text p{
@@ -766,3 +767,101 @@ span {
     }
 
 }
+
+/* Aggiungi una nuova classe specifica alla griglia dei post del blog */
+.blog-posts-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Una colonna per articolo */
+    gap: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.blog-post {
+    background-color: var(--bg-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.post-meta {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.post-content {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.read-more-link {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: var(--main-color-dark);
+}
+
+/* Aggiungi stili specifici per i post del blog */
+.blog-post h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.blog-post p {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Altri stili per i link all'interno dei post */
+.blog-post a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.blog-post a:hover {
+    color: var(--main-color-dark);
+}
+
+.blog {
+    margin-bottom: 4rem; /* Puoi regolare il valore del margine a tuo piacimento */
+    /* Inverti i colori di sfondo per le sezioni blog e contact */
+    background: var(--second-bg-color);
+}
+
+.blog h2 {
+    margin-bottom: 2rem; /* Aggiungi un margine inferiore al titolo se necessario */
+}
+
+
+

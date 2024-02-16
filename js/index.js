@@ -53,19 +53,25 @@ window.onscroll = () => {
     }
 };
 
-if (sectionId === "" || sectionId === "home") {
-    ScrollReveal({
-        //reset: true,
-        distance: '80px',
-        duration: 2000, 
-        delay: 200
-    });
-}
+document.addEventListener("DOMContentLoaded", function () {
+  ScrollReveal({
+      //reset: true,
+      distance: '80px',
+      duration: 2000, 
+      delay: 200
+  });
 
-ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
-ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .demos-box, .contact form', { origin: 'bottom' });
-ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
-ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
+  // Configurazioni di animazione per le sezioni
+  ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+  ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .demos-box, .contact form', { origin: 'bottom' });
+  ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
+  ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
+
+  // Configurazione di animazione per i post del blog
+  ScrollReveal().reveal('.blog-post-item', { origin: 'left', distance: '50px', duration: 1000 });
+});
+
+
 
 // typed js
 const typed = new Typed('.multiple-text', {
@@ -205,6 +211,59 @@ window.onload = function() {
       serviceBoxes[i].style.height = `${tallestBoxes[row]}px`;
     }
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    // URL del feed RSS
+    var rssFeedUrl = 'https://andreabonagames.wordpress.com/feed';
+
+
+    // Funzione per ottenere e visualizzare i post del blog
+// Funzione per ottenere e visualizzare i post del blog
+function fetchBlogPosts() {
+  fetch(rssFeedUrl)
+    .then((response) => response.text())
+    .then((xmlData) => {
+      var parser = new DOMParser();
+      var xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
+      // Trova tutti gli elementi 'item' nel feed RSS
+      var items = xmlDoc.querySelectorAll("item");
+
+      // Ottieni il contenuto del post e visualizzalo
+      items.forEach(function (item) {
+        var title = item.querySelector("title").textContent;
+        var link = item.querySelector("link").textContent;
+        var rawPubDate = item.querySelector("pubDate").textContent;
+            var description = item.querySelector("description").textContent;
+
+                // Converti la data grezza in un oggetto Data di JavaScript
+    var pubDateObj = new Date(rawPubDate);
+
+    // Formatta la data nel formato desiderato (dd mmm yyyy)
+    var formattedPubDate = pubDateObj.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+
+        // Creare un elemento div per ogni post e aggiungerlo alla pagina con una classe
+// Creare un elemento div per ogni post e aggiungerlo alla pagina con una classe
+var postDiv = document.createElement("div");
+      postDiv.classList.add("blog-post", "blog-post-item"); // Aggiungi la classe "blog-post" e "blog-post-item"
+      postDiv.innerHTML = `
+        <h2>${title}</h2>
+        <p>${formattedPubDate}</p>
+        <p>${description}</p>
+        <a href="${link}" target="_blank">Leggi di più</a>
+      `;
+      document.getElementById("blog-posts").appendChild(postDiv);
+      });
+    })
+    .catch((error) => console.error("Errore nel recupero del feed RSS:", error));
+}
+
+// Chiamare la funzione per recuperare e visualizzare i post del blog
+fetchBlogPosts();
+  });
 
 
 
