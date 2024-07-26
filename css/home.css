@@ -226,19 +226,66 @@ span {
 }
 
 
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.visible {
+    opacity: 1;
+    max-height: 1000px;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
 .services-container .services-box {
-    /* Aggiungi questa proprietà per limitare la larghezza massima del contenuto */
-    max-width: 50rem;
-    /* Il resto del tuo codice CSS rimane invariato */
-    flex: 1 1 50rem;
+    height: 300px; /* Fixed height */
+    overflow-y: auto; /* Enable vertical scrolling for overflow content */
+    max-width: 50rem; /* Maximum width of the box */
+    flex: 1 1 50rem;  /* Flexbox properties */
     background: var(--second-bg-color);
     padding: 3rem 2rem 4rem;
     border-radius: 2rem;
     text-align: center;
     border: .2rem solid var(--bg-color);
     transition: .5s ease;
+
+    /* Flexbox properties to center content */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
 }
 
+.services-box .icon {
+    width: 8rem;
+    height: 8rem;
+    color: var(--main-color);
+}
+
+.services h2 {
+    margin-bottom: 5rem;
+}
+
+.services-box h3 {
+    font-size: 3.5rem;
+    margin: 1rem 0; /* Adjust margin for better spacing */
+}
+
+.services-box p {
+    font-size: 1.4rem;
+    margin: 1rem 0 3rem;
+    text-align: justify;
+}
 
 .services-container .services-box:hover{
     border-color: var(--main-color);
@@ -246,29 +293,10 @@ span {
 }
 
 .services-box i{
-    font-size: 7rem;
+    font-size: 8rem;
     color: var(--main-color);
 }
 
-.services-box .icon{
-   width: 7rem;
-   height: 7rem;
-    color: var(--main-color);
-}
-
-.services h2{
-    margin-bottom: 5rem;
-}
-
-.services-box h3{
-    font-size: 2rem;
-}
-
-.services-box p{
-    font-size: 1.4rem;
-    margin: 1rem 0 3rem;
-    text-align: justify;
-}
 
 .portfolio{
     background: var(--bg-color);
