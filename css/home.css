@@ -721,6 +721,35 @@ span {
         margin-top: 4rem;
     }
 
+    /* Center the social media icons */
+  .home .social-media {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .home .social-media a {
+    margin: 0 10px; /* Add some spacing between icons */
+  }
+
+  /* Centra e limita la larghezza del pulsante "Scarica CV" */
+  .home .btn {
+    display: block; /* Trasforma in un elemento di blocco */
+    margin: 20px auto; /* Centro orizzontale */
+    text-align: center;
+    max-width: 150px; /* Limita la larghezza massima */
+    width: 80%; /* Imposta una larghezza fluida basata sulla dimensione del contenitore */
+  }
+
+  /* Centra e limita la larghezza del pulsante "Read More" */
+  .about-content .btn {
+    display: block; /* Trasforma in un elemento di blocco */
+    margin: 20px auto; /* Centro orizzontale */
+    text-align: center;
+    max-width: 150px; /* Limita la larghezza massima */
+    width: 80%; /* Imposta una larghezza fluida basata sulla dimensione del contenitore */
+  }
+
     .about {
         flex-direction: column-reverse;
     }
