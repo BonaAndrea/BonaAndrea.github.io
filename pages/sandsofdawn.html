@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sands of Dawn - Portfolio - Andrea Bona</title>
+    <script
+      type="text/javascript"
+      src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"
+    ></script>
+
+    <!-- box icons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/project.css" />
+    <link rel="stylesheet" href="../css/home.css" />
+  </head>
+
+  <body>
+    <!-- header design -->
+    <header class="header">
+      <a href="../index.html#portfolio" class="logo"><i class="bx bx-arrow-back"></i></a>
+      <link rel="icon" href="../images/webicon.png" type="image/x-icon">
+      <link rel="shortcut icon" href="../images/webicon.png" type="image/x-icon">
+
+      <i class="bx bx-menu" id="menu-icon"></i>
+
+      <nav class="navbar">
+        <a href="../index.html#home">Home</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#services">Skills</a>
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#portfolio" class="active">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+    
+    <section class="project" id="project">
+        <div class="project-content">
+            <div class="project-text">
+            <h1>Sands of Dawn</h1>
+        </div>
+        </div>
+ 
+
+    <div class="slides-container">
+      <!-- Slides -->
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/2.jpg" alt="Image" />
+      </div>
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/3.png" alt="Image" />
+      </div>
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/4.png" alt="Image" />
+      </div> <!-- Chiusura del tag div mancante -->
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/5.png" alt="Image" />
+      </div>
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/6.png" alt="Image" />
+      </div>
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/7.png" alt="Image" />
+      </div>
+      <div class="slide" data-slide>
+        <img src="../images/sands-of-dawn/Logo.jpg" alt="Image"/>
+      </div>
+
+      <!-- Next and Previous Buttons -->
+      <div class="carousel-buttons">
+        <button class="btn-crsl previous" data-button="previous">
+          <i class="bx bx-chevron-left"></i>
+        </button>
+        <button class="btn-crsl next" data-button="next">
+          <i class="bx bx-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="project-content">
+        <div class="project-text">
+            <p><span>Sands of Dawn</span> is my first <span>soulslike game</span> and my initial project in Unreal Engine. As a <span>gameplay developer</span>, I implemented the <span>gameplay mechanics</span> and <span>animations</span>, managing the integration between <span>C++</span> and <span>Blueprints</span>. I focused on creating a fluid and engaging experience, ensuring that the combat and movement dynamics were balanced and precise, capturing the essence and challenge typical of the soulslike genre. </p>
+            <div class="btn-container"><a href="https://mega.nz/file/afQwVCbD#Fxj0T90fHdGr7B_iqow9_gUbLiTkTJUbMU9nABNniHw" target="_blank" class="btn">Download</a> </div>       
+        </div>
+    </div>
+</section>
+
+    <!-- footer design -->
+    <footer class="project-footer">
+      <div class="footer-text">
+          <p>Copyright &copy; <span id="currentYearProject"></span> by Andrea Bona | All Rights Reserved.</p>
+      </div>
+  
+      <script>
+          document.getElementById("currentYearProject").innerHTML = new Date().getFullYear();
+      </script>
+  </footer>
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="../js/project.js"></script>
+  </body>
+</html>
