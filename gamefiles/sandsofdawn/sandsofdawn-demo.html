@@ -88,7 +88,7 @@
         }
         .btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
 
-        /* CAROUSEL DESKTOP STYLE */
+        /* CAROUSEL DESKTOP */
         .hero-carousel { position:relative; padding:0 3.2rem; display: block; }
         .carousel-track-wrapper {
             width:100%; aspect-ratio:16/9;
@@ -122,7 +122,7 @@
         .dot { width:0.6rem; height:0.6rem; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s; }
         .dot.active { background:var(--accent); width:2rem; border-radius:1rem; }
 
-        /* MOBILE BLOCKS CONTAINER */
+        /* MOBILE VERTICAL GRIDS */
         .project-media-mobile-container {
             display: none;
             flex-direction: column;
@@ -130,13 +130,9 @@
             width: 100%;
         }
         .mobile-media-holder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 1.2rem;
-            border: 1px solid rgba(0,238,255,0.2);
-            background: var(--bg2);
-            overflow: hidden;
-            position: relative;
+            width: 100%; aspect-ratio: 16/9; border-radius: 1.2rem;
+            border: 1px solid rgba(0,238,255,0.2); background: var(--bg2);
+            overflow: hidden; position: relative;
         }
         .mobile-media-holder img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .mobile-media-holder iframe { width: 100%; height: 100%; border: none; display: block; }
@@ -168,7 +164,7 @@
         }
         .lightbox-close:hover { color: var(--accent); }
 
-        /* DETAIL SECTION */
+        /* DETAIL */
         .detail { background:var(--bg3); padding:8rem 9%; border-top:1px solid rgba(0,238,255,0.08); }
         .detail-grid { display:grid; grid-template-columns:2fr 1fr; gap:6rem; align-items:start; }
         .section-label { font-size:1.1rem; letter-spacing:0.15rem; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:1.6rem; }
@@ -190,14 +186,11 @@
         .footer { display:flex; justify-content:space-between; align-items:center; padding:2rem 9%; background:var(--bg2); font-size:1.4rem; color:var(--muted); }
         .footer a { display:inline-flex; align-items:center; justify-content:center; padding:0.8rem; background:var(--accent); border-radius:0.8rem; }
 
-        /* RESPONSIVE BREAKPOINTS */
+        /* RESPONSIVE */
         @media (max-width:1024px) {
-            .header { padding: 1.8rem 5%; }
-            .hero { grid-template-columns:1fr; padding: 12rem 5% 6rem; gap: 5rem; min-height: auto; }
+            .hero { grid-template-columns:1fr; padding-top:10rem; }
             .hero-desc { max-width:100%; }
-            .detail { padding: 6rem 5%; }
             .detail-grid { grid-template-columns:1fr; gap:4rem; }
-            .footer { padding: 2rem 5%; }
         }
         
         @media (max-width:768px) {
@@ -211,12 +204,10 @@
             .navbar.active { display:flex; }
             .navbar a { padding:1.2rem 0; font-size:1.7rem; border-bottom:1px solid rgba(255,255,255,0.05); }
             
-            /* FLOW MOBILE: Testi sopra, media e screenshot SOTTO */
             .hero { display: flex; flex-direction: column; gap: 5rem; }
             .hero-info { width: 100%; }
             .hero-carousel { display: none !important; }
-            .project-media-mobile-container { display: flex; gap: 1.6rem; width: 100%; }
-            .mobile-media-holder { border-radius: 1.2rem; }
+            .project-media-mobile-container { display: flex; }
         }
     </style>
 </head>
@@ -249,10 +240,12 @@
     
     <div class="hero-carousel" id="desktop-carousel-wrap">
         <div class="carousel-track-wrapper">
-            <div class="carousel-track" id="track"></div>
+            <div class="carousel-clip">
+                <div class="carousel-track" id="track"></div>
+            </div>
+            <button class="c-btn prev" id="prev" aria-label="Previous slide"><i class='bx bx-chevron-left'></i></button>
+            <button class="c-btn next" id="next" aria-label="Next slide"><i class='bx bx-chevron-right'></i></button>
         </div>
-        <button class="c-btn prev" id="prev" aria-label="Previous slide"><i class='bx bx-chevron-left'></i></button>
-        <button class="c-btn next" id="next" aria-label="Next slide"><i class='bx bx-chevron-right'></i></button>
         <div class="carousel-dots" id="dots"></div>
     </div>
 
@@ -273,7 +266,7 @@
             </div>
             <div class="info-card">
                 <h3>Key features</h3>
-                <div class="feat-list" id="proj-features"></div>
+                <div id="proj-features"></div>
             </div>
         </div>
     </div>
@@ -298,7 +291,6 @@ menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
 
 const isMobileDevice = window.innerWidth <= 768 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
-// ── RENDER PROGETTO CON PROTEZIONE DEMO MOBILE ───────────
 function renderProject(p) {
     document.getElementById('page-title').textContent = p.title + ' - Portfolio - Andrea Bona';
     document.getElementById('page-desc').setAttribute('content', p.metaDesc || '');
@@ -346,7 +338,6 @@ function renderProject(p) {
     const mobileMediaContainer = document.getElementById('mobile-media-container');
 
     p.slides.forEach(s => {
-        // Popola desktop track
         const slideDiv = document.createElement('div');
         slideDiv.className = 'carousel-slide';
         if (s.type === 'video') {
@@ -356,7 +347,6 @@ function renderProject(p) {
         }
         track.appendChild(slideDiv);
 
-        // Popola mobile container
         const mobileHolder = document.createElement('div');
         mobileHolder.className = 'mobile-media-holder';
         if (s.type === 'video') {
@@ -393,7 +383,6 @@ function renderProject(p) {
     });
 }
 
-// ── SLIDER DESKTOP ENGINE ─────────────────────────────────
 function initCarousel() {
     const track   = document.getElementById('track');
     const slides  = track.querySelectorAll('.carousel-slide');
@@ -433,7 +422,6 @@ function initCarousel() {
     });
 }
 
-// ── LIGHTBOX SYSTEM ENGINE ───────────────────────────────
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.getElementById('lightbox-close');
@@ -467,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script src="data/alpine-rescue.js?v=1.1"></script>
+<script src="../pages/data/sandsofdawn-demo.js?v=1.1"></script>
 
 </body>
 </html>

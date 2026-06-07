@@ -1,103 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Funko Potter - Portfolio - Andrea Bona</title>
-    <script
-      type="text/javascript"
-      src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"
-    ></script>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title id="page-title">Project - Portfolio - Andrea Bona</title>
+    <meta name="description" id="page-desc" content="">
+    <link rel="icon" href="../images/webicon2.png" type="image/x-icon">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --bg:#1f242d; --bg2:#323946; --bg3:#252c38;
+            --text:#fff; --muted:rgba(255,255,255,0.6);
+            --accent:#0ef; --accent-dim:rgba(0,238,255,0.15);
+            --accent-border:rgba(0,238,255,0.35);
+        }
+        html { font-size:62.5%; scroll-behavior:smooth; }
+        body { background:var(--bg); color:var(--text); font-family:'Poppins',sans-serif; min-height:100vh; }
+        a { text-decoration:none; color:inherit; }
 
-    <!-- box icons -->
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <!-- custom css -->
-    <link rel="stylesheet" href="../css/project.css" />
-    <link rel="stylesheet" href="../css/home.css" />
-  </head>
+        /* HEADER */
+        .header {
+            position:fixed; top:0; left:0; width:100%; padding:1.8rem 9%;
+            background:rgba(31,36,45,0.92); backdrop-filter:blur(8px);
+            display:flex; justify-content:space-between; align-items:center;
+            z-index:100; border-bottom:1px solid rgba(0,238,255,0.08);
+        }
+        .back-btn { display:flex; align-items:center; gap:0.8rem; font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
+        .back-btn:hover { color:var(--accent); }
+        .back-btn i { font-size:2rem; }
+        .navbar { display:flex; gap:3.5rem; }
+        .navbar a { font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
+        .navbar a:hover, .navbar a.active { color:var(--accent); }
+        #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
 
-  <body>
-    <!-- header design -->
-    <header class="header">
-      <a href="../index.html#portfolio" class="logo"><i class="bx bx-arrow-back"></i></a>
-      <link rel="icon" href="../images/webicon2.png" type="image/x-icon">
-      <link rel="shortcut icon" href="../images/webicon2.png" type="image/x-icon">
+        /* HERO LAYOUT */
+        .hero {
+            min-height:100vh; display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+            padding:12rem 9% 6rem; align-items:center;
+        }
+        .hero-info { display:flex; flex-direction:column; gap:2.4rem; }
+        .project-category {
+            display:inline-flex; align-items:center; gap:0.8rem;
+            font-size:1.2rem; letter-spacing:0.15rem; text-transform:uppercase;
+            color:var(--accent); font-weight:600;
+        }
+        .project-category::before { content:''; width:3rem; height:1px; background:var(--accent); }
+        .hero-title { font-size:clamp(3.6rem,5vw,6rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; }
+        .hero-title span { color:var(--accent); }
+        .hero-meta { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .meta-pill {
+            display:flex; align-items:center; gap:0.6rem; padding:0.5rem 1.4rem; border-radius:10rem;
+            border:1px solid var(--accent-border); background:var(--accent-dim);
+            font-size:1.3rem; color:var(--accent);
+        }
+        .hero-desc { font-size:1.6rem; line-height:1.8; color:rgba(255,255,255,0.75); max-width:46rem; }
+        .tag-row { display:flex; flex-wrap:wrap; gap:0.8rem; }
+        .tag { font-size:1.1rem; padding:0.4rem 1.2rem; border-radius:0.6rem; background:var(--bg2); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); }
+        .cta-row { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:0.4rem; }
+        .btn-primary { padding:1.1rem 2.8rem; background:var(--accent); color:var(--bg); border-radius:10rem; font-size:1.5rem; font-weight:700; transition:0.3s; }
+        .btn-secondary { padding:1.1rem 2.8rem; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.25); border-radius:10rem; font-size:1.5rem; font-weight:600; transition:0.3s; }
 
-      <i class="bx bx-menu" id="menu-icon"></i>
+        /* CAROUSEL DESKTOP */
+        .hero-carousel { position:relative; padding:0 3.2rem; display: block; }
+        .carousel-track-wrapper { width:100%; aspect-ratio:16/9; border-radius:1.6rem; overflow:hidden; border:1px solid rgba(0,238,255,0.2); background:var(--bg2); position:relative; }
+        .carousel-track { display:flex; height:100%; transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); }
+        .carousel-slide { min-width:100%; height:100%; flex-shrink:0; }
+        .carousel-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+        .c-btn { position:absolute; top:50%; transform:translateY(-50%); width:4.4rem; height:4.4rem; background:var(--bg2); border:1px solid var(--accent-border); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10; }
+        .c-btn.prev { left:0; } .c-btn.next { right:0; }
 
-      <nav class="navbar">
+        /* MOBILE FLOW */
+        .project-media-mobile-container { display: none; flex-direction: column; gap: 1.6rem; width: 100%; }
+        .mobile-media-holder { width: 100%; aspect-ratio: 16/9; border-radius: 1.2rem; border: 1px solid rgba(0,238,255,0.2); background: var(--bg2); overflow: hidden; position: relative; }
+        .mobile-media-holder img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .zoom-hint { position: absolute; bottom: 1.2rem; right: 1.2rem; background: rgba(0,0,0,0.65); color: #fff; padding: 0.4rem 1rem; border-radius: 0.6rem; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.1); }
+
+        /* LIGHTBOX */
+        .lightbox-overlay { position: fixed; inset: 0; background: rgba(10,10,10,0.96); z-index: 999999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
+        .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+        .lightbox-img { max-width: 92vw; max-height: 85vh; object-fit: contain; border-radius: 0.8rem; }
+        .lightbox-close { position: absolute; top: 2.4rem; right: 2.4rem; font-size: 4rem; color: #fff; cursor: pointer; }
+
+        /* DETAIL & FOOTER */
+        .detail { background:var(--bg3); padding:8rem 9%; }
+        .detail-grid { display:grid; grid-template-columns:2fr 1fr; gap:6rem; }
+        .info-card { background:var(--bg2); border:1px solid rgba(255,255,255,0.07); border-radius:1.4rem; padding:2.4rem; }
+        .footer { display:flex; justify-content:space-between; align-items:center; padding:2rem 9%; background:var(--bg2); }
+
+        @media (max-width:768px) {
+            .hero { display: flex; flex-direction: column; gap: 5rem; padding: 10rem 5% 4rem; }
+            .hero-carousel { display: none !important; }
+            .project-media-mobile-container { display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="../index.html#portfolio" class="back-btn"><i class='bx bx-arrow-back'></i><span>Projects</span></a>
+    <i class='bx bx-menu' id="menu-icon"></i>
+    <nav class="navbar">
         <a href="../index.html#home">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#services">Skills</a>
-        <a href="../index.html#demos">Demos</a>
         <a href="../index.html#portfolio" class="active">Projects</a>
         <a href="../index.html#contact">Contact</a>
-      </nav>
-    </header>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-info">
+        <span class="project-category" id="proj-category"></span>
+        <h1 class="hero-title" id="proj-title"></h1>
+        <div class="hero-meta" id="proj-meta"></div>
+        <p class="hero-desc" id="proj-desc"></p>
+        <div class="tag-row" id="proj-tags"></div>
+        <div class="cta-row" id="proj-cta"></div>
+    </div>
     
-    <section class="project" id="project">
-        <div class="project-content">
-            <div class="project-text">
-            <h1>Funko Potter</h1>
+    <div class="hero-carousel" id="desktop-carousel-wrap">
+        <div class="carousel-track-wrapper">
+            <div class="carousel-track" id="track"></div>
         </div>
-        </div>
- 
-
-    <div class="slides-container">
-      <!-- Slides -->
-      <div class="slide" data-slide>
-        <img
-          src="..\images\funko-potter\fp1.png"
-        />
-      </div>
-      <div class="slide" data-slide>
-        <img src="..\images\funko-potter\fp2.png" alt="Image" />
-      </div>
-      <div class="slide" data-slide>
-        <img src="..\images\funko-potter\logo.png" alt="Image" />
-      </div>
-      <div class="slide" data-video>
-      <iframe src="https://player.vimeo.com/video/816916365" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      
-
-      <!-- Next and Previous Buttons -->
-      <div class="carousel-buttons">
-        <button class="btn-crsl previous" data-button="previous">
-          <i class="bx bx-chevron-left"></i>
-        </button>
-        <button class="btn-crsl next" data-button="next">
-          <i class="bx bx-chevron-right"></i>
-        </button>
-      </div>
+        <button class="c-btn prev" id="prev"><i class='bx bx-chevron-left'></i></button>
+        <button class="c-btn next" id="next"><i class='bx bx-chevron-right'></i></button>
+        <div class="carousel-dots" id="dots"></div>
     </div>
 
-    <div class="project-content">
-        <div class="project-text">
-            <p>As part of my Computer Graphics exam for the Master's in Computer Engineering at PoliTo, I completed a project that consisted of two parts: the first part involved using Blender to create a 3D render using various modeling techniques. In the second part, I designed an interactive game using HTML and X3DOM graphics library. I was given the task to <span>design</span> the game experience, coming up with a "dodge/attack" with single or multiplayer modes. I also worked on the characters implementation and their skills, with a focus on the balance of the game. Moreover, I had the task to <span>implement</span> the gameplay, making sure it was fully working in a <span>satisfying</span> manner.</p>
+    <div class="project-media-mobile-container" id="mobile-media-container"></div>
+</section>
+
+<section class="detail">
+    <div class="detail-grid">
+        <div class="detail-text">
+            <p class="section-label" id="detail-label"></p>
+            <h2 id="detail-heading"></h2>
+            <div id="detail-body"></div>
+        </div>
+        <div class="detail-sidebar">
+            <div class="info-card"><h3>Project info</h3><div id="proj-info-rows"></div></div>
+            <div class="info-card"><h3>Key features</h3><div class="feat-list" id="proj-features"></div></div>
         </div>
     </div>
 </section>
 
-    <!-- footer design -->
-    <footer class="project-footer">
-      <div class="footer-text">
-          <p>Copyright &copy; <span id="currentYearProject"></span> by Andrea Bona | All Rights Reserved.</p>
-      </div>
-  
-      <script>
-          document.getElementById("currentYearProject").innerHTML = new Date().getFullYear();
-      </script>
-  </footer>
-  
-  
+<footer class="footer">
+    <p>Copyright &copy; <span id="yr"></span> Andrea Bona.</p>
+    <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+</footer>
 
-    <!-- scroll reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="../js/project.js"></script>
-  </body>
+<div class="lightbox-overlay" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img src="" class="lightbox-img" id="lightbox-img">
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const menuIcon = document.getElementById('menu-icon');
+const navbar = document.querySelector('.navbar');
+menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
+
+const isMobile = window.innerWidth <= 768;
+
+function renderProject(p) {
+    document.getElementById('page-title').textContent = p.title + ' - Portfolio - Andrea Bona';
+    document.getElementById('proj-category').textContent = p.category;
+    document.getElementById('proj-title').innerHTML = p.titleHTML;
+    document.getElementById('proj-desc').textContent = p.shortDesc;
+
+    p.meta.forEach(m => {
+        const pill = document.createElement('span'); pill.className = 'meta-pill';
+        pill.innerHTML = `<i class='bx ${m.icon}'></i> ${m.text}`;
+        document.getElementById('proj-meta').appendChild(pill);
+    });
+
+    p.tags.forEach(t => {
+        const s = document.createElement('span'); s.className = 'tag'; s.textContent = t;
+        document.getElementById('proj-tags').appendChild(s);
+    });
+
+    p.cta.forEach(c => {
+        const a = document.createElement('a');
+        const isGame = c.label.toLowerCase().includes('play') || c.label.toLowerCase().includes('demo');
+        if (isMobile && isGame) {
+            a.className = 'btn-secondary'; a.innerHTML = `<i class='bx bx-desktop'></i> Gioca da PC`;
+            a.style.opacity = '0.5'; a.style.cursor = 'not-allowed'; a.style.pointerEvents = 'none';
+        } else {
+            a.href = c.href; if(c.external) a.target='_blank';
+            a.className = c.primary ? 'btn-primary' : 'btn-secondary';
+            a.innerHTML = `<i class='bx ${c.icon}'></i> ${c.label}`;
+        }
+        document.getElementById('proj-cta').appendChild(a);
+    });
+
+    const track = document.getElementById('track');
+    const mobContainer = document.getElementById('mobile-media-container');
+    p.slides.forEach(s => {
+        const slide = document.createElement('div'); slide.className = 'carousel-slide';
+        slide.innerHTML = `<img src="${s.src}" alt=""/>`;
+        track.appendChild(slide);
+        
+        const mHolder = document.createElement('div'); mHolder.className = 'mobile-media-holder';
+        mHolder.innerHTML = `<img src="${s.src}" alt=""/><div class="zoom-hint"><i class='bx bx-zoom-in'></i> Zoom</div>`;
+        mHolder.addEventListener('click', () => { document.getElementById('lightbox-img').src=s.src; document.getElementById('lightbox').classList.add('active'); });
+        mobContainer.appendChild(mHolder);
+    });
+
+    document.getElementById('detail-label').textContent = p.detail.label;
+    document.getElementById('detail-heading').textContent = p.detail.heading;
+    document.getElementById('detail-body').innerHTML = p.detail.bodyHTML;
+    p.info.forEach(r => {
+        const div = document.createElement('div'); div.className = 'info-row';
+        div.innerHTML = `<span class="label">${r.label}</span><span class="value">${r.value}</span>`;
+        document.getElementById('proj-info-rows').appendChild(div);
+    });
+    p.features.forEach(f => {
+        const div = document.createElement('div'); div.className = 'feat-item';
+        div.innerHTML = `<i class='bx ${f.icon}'></i> ${f.text}`;
+        document.getElementById('proj-features').appendChild(div);
+    });
+}
+
+function initCarousel() {
+    const track = document.getElementById('track');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dots = document.getElementById('dots');
+    let current = 0;
+    if (slides.length === 0) return;
+    slides.forEach((_, i) => {
+        const d = document.createElement('div'); d.className = 'dot' + (i===0?' active':'');
+        d.addEventListener('click', () => { current = i; track.style.transform = `translateX(-${i*100}%)`; dots.querySelectorAll('.dot').forEach((doT, j) => doT.classList.toggle('active', j===i)); });
+        dots.appendChild(d);
+    });
+    document.getElementById('prev').addEventListener('click', () => { if(current>0) { current--; track.style.transform = `translateX(-${current*100}%)`; }});
+    document.getElementById('next').addEventListener('click', () => { if(current<slides.length-1) { current++; track.style.transform = `translateX(-${current*100}%)`; }});
+}
+
+const lb = document.getElementById('lightbox');
+document.getElementById('lightbox-close').addEventListener('click', () => lb.classList.remove('active'));
+lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('active'); });
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(window.PROJECT_DATA) {
+        renderProject(window.PROJECT_DATA);
+        initCarousel();
+    }
+});
+</script>
+
+<script src="data/funkopotter.js?v=1.1"></script>
+
+</body>
 </html>

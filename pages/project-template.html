@@ -42,11 +42,11 @@
         .navbar a:hover, .navbar a.active { color:var(--accent); }
         #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
 
-        /* HERO LAYOUT DESKTOP */
+        /* HERO LAYOUT */
         .hero {
             min-height:100vh;
-            display:grid; grid-template-columns:1fr 1fr; gap:4rem;
-            padding:12rem 9% 6rem; align-items:center;
+            display:grid; grid-template-columns:1fr 1fr; gap:6rem;
+            padding:14rem 9% 6rem; align-items:center;
         }
         .hero-info { display:flex; flex-direction:column; gap:2.4rem; }
         .project-category {
@@ -65,7 +65,7 @@
             font-size:1.3rem; color:var(--accent);
         }
         .meta-pill i { font-size:1.6rem; }
-        .hero-desc { font-size:1.6rem; line-height:1.8; color:rgba(255,255,255,0.75); max-width:46rem; }
+        .hero-desc { font-size:1.6rem; line-height:1.8; color:rgba(255,255,255,0.75); max-width:100%; }
         .tag-row { display:flex; flex-wrap:wrap; gap:0.8rem; }
         .tag {
             font-size:1.1rem; padding:0.4rem 1.2rem; border-radius:0.6rem;
@@ -88,59 +88,36 @@
         }
         .btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
 
-        /* CAROUSEL DESKTOP STYLE */
-        .hero-carousel { position:relative; padding:0 3.2rem; display: block; }
-        .carousel-track-wrapper {
-            width:100%; aspect-ratio:16/9;
-            border-radius:1.6rem; overflow:hidden;
-            border:1px solid rgba(0,238,255,0.2);
-            background:var(--bg2); position:relative;
-        }
-        .carousel-track {
-            display:flex; height:100%;
-            transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);
-            will-change:transform;
-        }
-        .carousel-slide { min-width:100%; height:100%; flex-shrink:0; }
-        .carousel-slide img { width:100%; height:100%; object-fit:cover; display:block; }
-        .carousel-slide iframe { width:100%; height:100%; border:none; display:block; }
-
-        .c-btn {
-            position:absolute; top:50%; transform:translateY(-50%);
-            width:4.4rem; height:4.4rem; background:var(--bg2);
-            border:1px solid var(--accent-border); border-radius:50%;
-            display:flex; align-items:center; justify-content:center;
-            cursor:pointer; transition:background 0.3s, box-shadow 0.3s; z-index:10;
-        }
-        .c-btn:hover { background:var(--accent); box-shadow:0 0 1rem rgba(0,238,255,0.5); }
-        .c-btn:hover i { color:var(--bg); }
-        .c-btn i { font-size:2.2rem; color:var(--accent); transition:color 0.3s; }
-        .c-btn.prev { left:0; }
-        .c-btn.next { right:0; }
-
-        .carousel-dots { display:flex; justify-content:center; gap:0.8rem; margin-top:1.6rem; }
-        .dot { width:0.6rem; height:0.6rem; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s; }
-        .dot.active { background:var(--accent); width:2rem; border-radius:1rem; }
-
-        /* MOBILE BLOCKS CONTAINER */
-        .project-media-mobile-container {
-            display: none;
+        /* NUOVA GRIGLIA IMMAGINI PROGETTO (SOSTITUISCE IL CAROUSEL) */
+        .project-media-container {
+            display: flex;
             flex-direction: column;
-            gap: 1.6rem;
+            gap: 2rem;
             width: 100%;
         }
-        .mobile-media-holder {
+        .media-holder {
             width: 100%;
             aspect-ratio: 16/9;
-            border-radius: 1.2rem;
+            border-radius: 1.6rem;
             border: 1px solid rgba(0,238,255,0.2);
             background: var(--bg2);
             overflow: hidden;
             position: relative;
+            cursor: zoom-in;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .mobile-media-holder img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .mobile-media-holder iframe { width: 100%; height: 100%; border: none; display: block; }
-        
+        .media-holder:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+        .media-holder img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .media-holder iframe {
+            width: 100%; height: 100%; border: none; display: block;
+        }
+        /* Badge indicatore di click zoom */
         .zoom-hint {
             position: absolute; bottom: 1.2rem; right: 1.2rem;
             background: rgba(0, 0, 0, 0.65); color: #fff;
@@ -149,22 +126,27 @@
             pointer-events: none; border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* LIGHTBOX SYSTEM */
+        /* ── LIGHTBOX OVERLAY (FULLSCREEN SYSTEM) ──────────────── */
         .lightbox-overlay {
             position: fixed; inset: 0; background: rgba(10, 10, 10, 0.96);
             z-index: 999999; display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
-        .lightbox-overlay.active { opacity: 1; pointer-events: all; }
+        .lightbox-overlay.active {
+            opacity: 1; pointer-events: all;
+        }
         .lightbox-img {
             max-width: 92vw; max-height: 85vh; object-fit: contain;
             border-radius: 0.8rem; transform: scale(0.95);
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .lightbox-overlay.active .lightbox-img { transform: scale(1); }
+        .lightbox-overlay.active .lightbox-img {
+            transform: scale(1);
+        }
         .lightbox-close {
             position: absolute; top: 2.4rem; right: 2.4rem;
-            font-size: 4rem; color: rgba(255,255,255,0.6); cursor: pointer; transition: color 0.3s;
+            font-size: 4rem; color: rgba(255,255,255,0.6);
+            cursor: pointer; transition: color 0.3s;
         }
         .lightbox-close:hover { color: var(--accent); }
 
@@ -175,6 +157,7 @@
         .detail-text h2 { font-size:3rem; font-weight:700; margin-bottom:2.4rem; line-height:1.2; }
         .detail-text p { font-size:1.6rem; line-height:1.9; color:rgba(255,255,255,0.75); margin-bottom:2rem; }
         .detail-text p:last-child { margin-bottom:0; }
+        .detail-text span { color:var(--accent); font-weight:600; }
         .detail-sidebar { display:flex; flex-direction:column; gap:2rem; }
         .info-card { background:var(--bg2); border:1px solid rgba(255,255,255,0.07); border-radius:1.4rem; padding:2.4rem; }
         .info-card h3 { font-size:1.2rem; letter-spacing:0.12rem; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:1.6rem; }
@@ -188,13 +171,14 @@
 
         /* FOOTER */
         .footer { display:flex; justify-content:space-between; align-items:center; padding:2rem 9%; background:var(--bg2); font-size:1.4rem; color:var(--muted); }
-        .footer a { display:inline-flex; align-items:center; justify-content:center; padding:0.8rem; background:var(--accent); border-radius:0.8rem; }
+        .footer a { display:inline-flex; align-items:center; justify-content:center; padding:0.8rem; background:var(--accent); border-radius:0.8rem; transition:box-shadow 0.3s; }
+        .footer a:hover { box-shadow:0 0 1rem var(--accent); }
+        .footer a i { font-size:2rem; color:var(--bg); }
 
         /* RESPONSIVE BREAKPOINTS */
         @media (max-width:1024px) {
             .header { padding: 1.8rem 5%; }
             .hero { grid-template-columns:1fr; padding: 12rem 5% 6rem; gap: 5rem; min-height: auto; }
-            .hero-desc { max-width:100%; }
             .detail { padding: 6rem 5%; }
             .detail-grid { grid-template-columns:1fr; gap:4rem; }
             .footer { padding: 2rem 5%; }
@@ -206,17 +190,18 @@
             .navbar {
                 position:absolute; top:100%; left:0; width:100%;
                 flex-direction:column; gap:0; background:var(--bg);
-                border-top:1px solid rgba(255,255,255,0.07); display:none; padding:1rem 9%;
+                border-top:1px solid rgba(255,255,255,0.07);
+                display:none; padding:1rem 5%;
+                box-shadow: 0 1rem 2rem rgba(0,0,0,0.3);
             }
             .navbar.active { display:flex; }
             .navbar a { padding:1.2rem 0; font-size:1.7rem; border-bottom:1px solid rgba(255,255,255,0.05); }
             
-            /* FLOW MOBILE: Testi sopra, media e screenshot SOTTO */
-            .hero { display: flex; flex-direction: column; gap: 5rem; }
+            /* Su mobile mostra prima le immagini grandi e poi le scritte */
+            .hero { display: flex; flex-direction: column-reverse; gap: 4rem; }
             .hero-info { width: 100%; }
-            .hero-carousel { display: none !important; }
-            .project-media-mobile-container { display: flex; gap: 1.6rem; width: 100%; }
-            .mobile-media-holder { border-radius: 1.2rem; }
+            .project-media-container { gap: 1.6rem; }
+            .media-holder { border-radius: 1.2rem; }
         }
     </style>
 </head>
@@ -246,17 +231,7 @@
         <div class="tag-row" id="proj-tags"></div>
         <div class="cta-row" id="proj-cta"></div>
     </div>
-    
-    <div class="hero-carousel" id="desktop-carousel-wrap">
-        <div class="carousel-track-wrapper">
-            <div class="carousel-track" id="track"></div>
-        </div>
-        <button class="c-btn prev" id="prev" aria-label="Previous slide"><i class='bx bx-chevron-left'></i></button>
-        <button class="c-btn next" id="next" aria-label="Next slide"><i class='bx bx-chevron-right'></i></button>
-        <div class="carousel-dots" id="dots"></div>
-    </div>
-
-    <div class="project-media-mobile-container" id="mobile-media-container"></div>
+    <div class="project-media-container" id="media-container"></div>
 </section>
 
 <section class="detail">
@@ -273,7 +248,7 @@
             </div>
             <div class="info-card">
                 <h3>Key features</h3>
-                <div class="feat-list" id="proj-features"></div>
+                <div id="proj-features"></div>
             </div>
         </div>
     </div>
@@ -296,9 +271,7 @@ const menuIcon = document.getElementById('menu-icon');
 const navbar   = document.querySelector('.navbar');
 menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
 
-const isMobileDevice = window.innerWidth <= 768 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
-
-// ── RENDER PROGETTO CON PROTEZIONE DEMO MOBILE ───────────
+// ── RENDER STRUTTURA DATI PROGETTO ────────────────────────
 function renderProject(p) {
     document.getElementById('page-title').textContent = p.title + ' - Portfolio - Andrea Bona';
     document.getElementById('page-desc').setAttribute('content', p.metaDesc || '');
@@ -318,58 +291,44 @@ function renderProject(p) {
     const tagEl = document.getElementById('proj-tags');
     p.tags.forEach(t => {
         const s = document.createElement('span');
-        s.className = 'tag'; s.textContent = t;
+        s.className = 'tag';
+        s.textContent = t;
         tagEl.appendChild(s);
     });
 
     const ctaEl = document.getElementById('proj-cta');
     p.cta.forEach(c => {
         const a = document.createElement('a');
-        const isGameAction = c.label.toLowerCase().includes('play') || c.label.toLowerCase().includes('demo');
-
-        if (isMobileDevice && isGameAction) {
-            a.className = 'btn-secondary';
-            a.innerHTML = `<i class='bx bx-desktop'></i> Gioca da PC`;
-            a.style.opacity = '0.5';
-            a.style.cursor = 'not-allowed';
-            a.style.pointerEvents = 'none';
-        } else {
-            a.href = c.href;
-            if (c.external) a.target = '_blank';
-            a.className = c.primary ? 'btn-primary' : 'btn-secondary';
-            a.innerHTML = `<i class='bx ${c.icon}'></i> ${c.label}`;
-        }
+        a.href = c.href;
+        if (c.external) a.target = '_blank';
+        a.className = c.primary ? 'btn-primary' : 'btn-secondary';
+        a.innerHTML = `<i class='bx ${c.icon}'></i> ${c.label}`;
         ctaEl.appendChild(a);
     });
 
-    const track = document.getElementById('track');
-    const mobileMediaContainer = document.getElementById('mobile-media-container');
-
+    // GENERA LE IMMAGINI/VIDEO NATIVI NELLA GRIGLIA
+    const mediaContainer = document.getElementById('media-container');
     p.slides.forEach(s => {
-        // Popola desktop track
-        const slideDiv = document.createElement('div');
-        slideDiv.className = 'carousel-slide';
+        const holder = document.createElement('div');
+        holder.className = 'media-holder';
+        
         if (s.type === 'video') {
-            slideDiv.innerHTML = `<iframe src="${s.src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            // Se è un video lasciamo l'iframe (non viene zoomato per ovvi motivi)
+            holder.style.cursor = 'default';
+            holder.innerHTML = `<iframe src="${s.src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         } else {
-            slideDiv.innerHTML = `<img src="${s.src}" alt="${s.alt || ''}"/>`;
-        }
-        track.appendChild(slideDiv);
-
-        // Popola mobile container
-        const mobileHolder = document.createElement('div');
-        mobileHolder.className = 'mobile-media-holder';
-        if (s.type === 'video') {
-            mobileHolder.innerHTML = `<iframe src="${s.src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        } else {
-            mobileHolder.style.cursor = 'zoom-in';
-            mobileHolder.innerHTML = `
-                <img src="${s.src}" alt="${s.alt || ''}"/>
+            // Se è un'immagine, applichiamo la logica e il trigger di click per il Lightbox
+            holder.innerHTML = `
+                <img src="${s.src}" alt="${s.alt || 'Project screenshot'}" class="zoomable-img"/>
                 <div class="zoom-hint"><i class='bx bx-zoom-in'></i> Zoom</div>
             `;
-            mobileHolder.addEventListener('click', () => openLightbox(s.src));
+            
+            // Evento click per aprire questa specifica immagine nel Lightbox full-screen
+            holder.addEventListener('click', () => {
+                openLightbox(s.src);
+            });
         }
-        mobileMediaContainer.appendChild(mobileHolder);
+        mediaContainer.appendChild(holder);
     });
 
     document.getElementById('detail-label').textContent   = p.detail.label;
@@ -393,47 +352,7 @@ function renderProject(p) {
     });
 }
 
-// ── SLIDER DESKTOP ENGINE ─────────────────────────────────
-function initCarousel() {
-    const track   = document.getElementById('track');
-    const slides  = track.querySelectorAll('.carousel-slide');
-    const dotsEl  = document.getElementById('dots');
-    const total   = slides.length;
-    let current   = 0;
-
-    if (total === 0) return;
-
-    slides.forEach((_, i) => {
-        const d = document.createElement('div');
-        d.className = 'dot' + (i === 0 ? ' active' : '');
-        d.addEventListener('click', () => goTo(i));
-        dotsEl.appendChild(d);
-    });
-
-    function goTo(index) {
-        current = ((index % total) + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dotsEl.querySelectorAll('.dot').forEach((d, i) =>
-            d.classList.toggle('active', i === current));
-    }
-
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-
-    let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive:true });
-    track.addEventListener('touchend', e => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
-    });
-}
-
-// ── LIGHTBOX SYSTEM ENGINE ───────────────────────────────
+// ── SISTEMA LIGHTBOX NATIVO ─────────────────────────────
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.getElementById('lightbox-close');
@@ -443,31 +362,33 @@ function openLightbox(src) {
     lightboxImg.src = src;
     lightbox.classList.add('active');
 }
+
 function closeLightbox() {
     if (!lightbox) return;
     lightbox.classList.remove('active');
 }
+
+// Chiudi cliccando sulla X o in un punto vuoto dello sfondo nero
 if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
 if (lightbox) {
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 }
+
+// Chiudi premendo il tasto ESC della tastiera
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
 });
 
+// ── INIZIALIZZAZIONE ───────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     if (window.PROJECT_DATA) {
         renderProject(window.PROJECT_DATA);
-        initCarousel();
     } else {
         console.error('PROJECT_DATA non trovato.');
     }
 });
 </script>
-
-<script src="data/alpine-rescue.js?v=1.1"></script>
-
 </body>
 </html>
