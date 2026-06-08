@@ -1,6 +1,6 @@
 window.DEMO_DATA = {
-    title:    "X's & O's & X's & O's — Demo",
-    metaDesc: "Play X's & O's & X's & O's — an original evolution of Tic-Tac-Toe by Andrea Bona.",
+    title:    "X's & O's & X's & O's - Demo",
+    metaDesc: "Play X's & O's & X's & O's - an original evolution of Tic-Tac-Toe by Andrea Bona.",
     category:  "Browser Game · Original Design",
     titleHTML: "X's & O's &<br><span>X's & O's</span>",
     meta: [
@@ -8,7 +8,7 @@ window.DEMO_DATA = {
         { icon: "bx-globe",    text: "Browser / Mobile"},
         { icon: "bx-user",     text: "Solo project"    },
     ],
-    shortDesc: "An original evolution of Tic-Tac-Toe — invented, designed and built from scratch. Playable directly in the browser on desktop and mobile.",
+    shortDesc: "An original evolution of Tic-Tac-Toe - invented, designed and built from scratch. Playable directly in the browser on desktop and mobile.",
     tags: ["Unity", "WebGL", "Game Design", "Mobile"],
     cta: [],
     unity: {

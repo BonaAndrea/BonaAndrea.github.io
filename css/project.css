@@ -1,5 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+/* RESET BASE (ok tenerlo, ma UNA sola volta nel progetto) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY: neutro, NON deve mai influenzare layout globale */
+body {
+  background-color: #090909;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+/* =======================
+   SLIDES / CAROUSEL
+======================= */
+
 .slides-container {
   width: 60vw;
   height: 50vh;
@@ -18,12 +36,12 @@
 }
 
 .slide img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 1.5rem;
-  border: 2px solid white;
+  border: 2px solid #fff;
+  display: block;
 }
 
 .slide[data-video] {
@@ -36,86 +54,82 @@
   width: 100%;
   height: 100%;
   border-radius: 1.5rem;
-  border: 2px solid white;
+  border: 2px solid #fff;
 }
 
+/* =======================
+   BUTTONS CAROUSEL
+======================= */
+
 .btn-crsl {
-  background: solid white;
   border: none;
   height: 5rem;
   width: 5rem;
   cursor: pointer;
-  transform: translateY(-50%);
   position: absolute;
-  border-radius: 10rem;
-  transition: 0.5s ease;
-  margin: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  transition: 0.3s ease;
+  background: #fff;
 }
 
 .btn-crsl i {
-  color: var(--second-bg-color);
   font-size: 2.5rem;
-  position: relative;
-  top: 0.25rem;
+  color: #090909;
 }
 
 .btn-crsl:hover {
-  background: var(--main-color);
-  box-shadow: 0 0 0.5rem var(--main-color);
+  background: #0ef;
+  box-shadow: 0 0 0.5rem #0ef;
 }
 
 .btn-crsl:hover i {
-  color: white;
+  color: #fff;
 }
 
 .btn-crsl.previous {
-  top: 50%;
   left: 0;
 }
 
 .btn-crsl.next {
-  top: 50%;
   right: 0;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  height: 100vh;
-  background-color: #090909;
-  display: grid;
-  place-items: center;
-}
+/* =======================
+   FOOTER
+======================= */
 
 .project-footer {
   position: fixed;
   bottom: 0;
-  padding: 2rem 9%;
-  background: var(--second-bg-color);
   width: 100%;
+  padding: 2rem 9%;
+  background: #1f242d;
 }
 
-.footer-text p {
-  font-size: 1.6rem;
-  text-align: center;
-}
-
-.logo {
-  transition: 0.5s ease;
-}
-
-.logo:hover {
-  color: var(--main-color);
-}
+/* =======================
+   PROJECT CONTENT
+   (ridotto e non duplicato)
+======================= */
 
 .project {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5rem;
+}
+
+.project-content h1 {
+  font-size: 5.6rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .project-content h3 {
@@ -127,64 +141,30 @@ body {
   margin-bottom: 2rem;
 }
 
-span {
-  color: var(--main-color);
-}
-
-.project-content h1 {
-  font-size: 5.6rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.project-content {
-  padding-bottom: 5rem; /* adjust as needed */
-}
-
 .project-content p {
-  margin: 3.5rem;
-  margin-bottom: -3rem;
   width: 50vw;
+  margin: 3.5rem;
   padding: 5rem 2.5rem;
   font-size: 1.6rem;
 }
 
-.project-footer {
-  margin-top: 5rem; /* adjust as needed */
-}
-
-.project-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.btn-container {
-  margin-bottom: 5rem;
-  display: flex;
-  justify-content: center;
-}
-
+/* =======================
+   RESPONSIVE
+======================= */
 
 @media (max-width: 1000px) {
   .slides-container {
     width: 100%;
     height: 25vh;
-    display: flex;
-    white-space: nowrap; /* aggiunta */
-    overflow-x: hidden; /* aggiunta */
-    align-items: center;
-    justify-content: space-around;
+    overflow-x: hidden;
   }
-    .project-content p {
+
+  .project-content p {
     width: 100%;
-    margin: 3.5rem 0rem 0 1rem;
-    margin-bottom:-1.5rem;
-    } 
-
-    .carousel-buttons {
-      display: none;
-    }
-
+    margin: 3.5rem 1rem 0 1rem;
   }
 
+  .carousel-buttons {
+    display: none;
+  }
+}

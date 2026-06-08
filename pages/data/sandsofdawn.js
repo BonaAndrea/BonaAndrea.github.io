@@ -14,7 +14,7 @@ window.PROJECT_DATA = {
         { icon: "bx-joystick",  text: "PC"            },
     ],
 
-    shortDesc: "My first Unreal Engine 5 project — a soulslike built entirely from scratch over six months, handling every aspect from combat systems to UI, sounds and level design.",
+    shortDesc: "My first Unreal Engine 5 project - a soulslike built entirely from scratch over six months, handling every aspect from combat systems to UI, sounds and level design.",
 
     tags: ["C++", "Blueprints", "UE5", "Animation Blueprint", "Behavior Tree", "State Machine"],
 
@@ -39,7 +39,7 @@ window.PROJECT_DATA = {
         label:   "About the project",
         heading: "From zero to soulslike",
         bodyHTML: `
-            <p><span>Sands of Dawn</span> is my first <span>Unreal Engine 5</span> and <span>C++</span> project, developed solo over <span>six months</span>. Built entirely from scratch, I handled every aspect of the game — gameplay, animations, UI, audio and level design.</p>
+            <p><span>Sands of Dawn</span> is my first <span>Unreal Engine 5</span> and <span>C++</span> project, developed solo over <span>six months</span>. Built entirely from scratch, I handled every aspect of the game - gameplay, animations, UI, audio and level design.</p>
             <p>The core of the project is the <span>combat system</span>, which includes light and heavy attacks, i-frame dodge, parry/deflect and a <span>stamina system</span> governing all player actions. I adopted a hybrid architecture: <span>C++ for the core logic</span> (character state management, damage calculation, stamina) and <span>Blueprints for events and animations</span>, integrating Animation Blueprint with a State Machine and Montages for combat transitions.</p>
             <p>The three main technical challenges were: precisely <span>syncing animations and hitboxes</span> to achieve an authentic soulslike combat feel; <span>managing the character state machine</span> to prevent inconsistent transitions between attack, dodge and parry; and <span>bridging C++ and Blueprints</span> across a complex project while learning the engine from the ground up. Enemy AI is driven by a <span>Behavior Tree</span> that reacts to player distance and actions.</p>
         `,

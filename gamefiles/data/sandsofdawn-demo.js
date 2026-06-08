@@ -1,6 +1,6 @@
 window.PROJECT_DATA = {
-    title:    "Sands of Dawn — Demo",
-    metaDesc: "Play the Sands of Dawn demo — a soulslike built in Unreal Engine 5 and C++ by Andrea Bona.",
+    title:    "Sands of Dawn - Demo",
+    metaDesc: "Play the Sands of Dawn demo - a soulslike built in Unreal Engine 5 and C++ by Andrea Bona.",
     category:  "Soulslike · Unreal Engine 5",
     titleHTML: "Sands of<br><span>Dawn</span>",
     meta: [
@@ -8,7 +8,7 @@ window.PROJECT_DATA = {
         { icon: "bx-desktop",     text: "PC"            },
         { icon: "bx-time-five",   text: "6+ months"     },
     ],
-    shortDesc: "A soulslike built from scratch in Unreal Engine 5 and C++. Light/heavy attacks, parry, dodge and stamina system — all developed solo over six months.",
+    shortDesc: "A soulslike built from scratch in Unreal Engine 5 and C++. Light/heavy attacks, parry, dodge and stamina system - all developed solo over six months.",
     tags: ["C++", "Blueprints", "UE5", "Soulslike", "Combat"],
     cta: [
         { label: "Download & Play", icon: "bx-download", href: "https://mega.nz/file/afQwVCbD#Fxj0T90fHdGr7B_iqow9_gUbLiTkTJUbMU9nABNniHw", primary: true, external: true },
@@ -24,7 +24,7 @@ window.PROJECT_DATA = {
         label:   "About the demo",
         heading: "Try the soulslike",
         bodyHTML: `
-            <p><span>Sands of Dawn</span> is my first <span>Unreal Engine 5</span> project — a soulslike built solo over six months. The demo gives you access to the full combat system: <span>light and heavy attacks</span>, <span>parry/deflect</span>, <span>i-frame dodge</span> and a <span>stamina system</span> that ties everything together.</p>
+            <p><span>Sands of Dawn</span> is my first <span>Unreal Engine 5</span> project - a soulslike built solo over six months. The demo gives you access to the full combat system: <span>light and heavy attacks</span>, <span>parry/deflect</span>, <span>i-frame dodge</span> and a <span>stamina system</span> that ties everything together.</p>
             <p>Download the executable, unzip and run. No installation required.</p>
         `,
     },

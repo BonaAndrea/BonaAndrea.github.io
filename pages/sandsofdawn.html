@@ -25,26 +25,44 @@
         a { text-decoration:none; color:inherit; }
 
         /* HEADER */
-        .header {
-            position:fixed; top:0; left:0; width:100%;
-            padding:1.8rem 9%;
-            background:rgba(31,36,45,0.92);
-            backdrop-filter:blur(8px);
-            display:flex; justify-content:space-between; align-items:center;
-            z-index:100;
-            border-bottom:1px solid rgba(0,238,255,0.08);
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.8rem 9%;
+    background: rgba(31, 36, 45, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+        .navbar a,
+        .back-btn {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.25s ease;
         }
-        .back-btn { display:flex; align-items:center; gap:0.8rem; font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
         .back-btn:hover { color:var(--accent); }
-        .back-btn i { font-size:2rem; }
+        .back-btn i,
+        #menu-icon {
+            color: rgba(255,255,255,0.85);
+        }
         .navbar { display:flex; gap:3.5rem; }
         .navbar a { font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
-        .navbar a:hover, .navbar a.active { color:var(--accent); }
-        #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
+        .navbar a:hover,
+        .navbar a.active,
+        .back-btn:hover {
+            color: var(--accent);
+        }       
+ #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
 
         /* HERO LAYOUT DESKTOP */
         .hero {
-            min-height:100vh;
+            min-height: calc(50vh - 8rem); 
             display:grid; grid-template-columns:1fr 1fr; gap:4rem;
             padding:12rem 9% 6rem; align-items:center;
         }
@@ -249,9 +267,7 @@
         <a href="../index.html#home">Home</a>
         <a href="../index.html#about">About</a>
         <a href="../index.html#services">Skills</a>
-        <a href="../index.html#demos">Demos</a>
         <a href="../index.html#portfolio" class="active">Projects</a>
-        <a href="../index.html#contact">Contact</a>
     </nav>
 </header>
 

@@ -25,26 +25,44 @@
         a { text-decoration:none; color:inherit; }
 
         /* HEADER */
-        .header {
-            position:fixed; top:0; left:0; width:100%;
-            padding:1.8rem 9%;
-            background:rgba(31,36,45,0.92);
-            backdrop-filter:blur(8px);
-            display:flex; justify-content:space-between; align-items:center;
-            z-index:100;
-            border-bottom:1px solid rgba(0,238,255,0.08);
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.8rem 9%;
+    background: rgba(31, 36, 45, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+        .navbar a,
+        .back-btn {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.25s ease;
         }
-        .back-btn { display:flex; align-items:center; gap:0.8rem; font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
         .back-btn:hover { color:var(--accent); }
-        .back-btn i { font-size:2rem; }
+        .back-btn i,
+        #menu-icon {
+            color: rgba(255,255,255,0.85);
+        }
         .navbar { display:flex; gap:3.5rem; }
         .navbar a { font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
-        .navbar a:hover, .navbar a.active { color:var(--accent); }
-        #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
+        .navbar a:hover,
+        .navbar a.active,
+        .back-btn:hover {
+            color: var(--accent);
+        }       
+ #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
 
         /* HERO LAYOUT DESKTOP */
         .hero {
-            min-height:100vh;
+            min-height: calc(50vh - 8rem); 
             display:grid; grid-template-columns:1fr 1fr; gap:4rem;
             padding:12rem 9% 6rem; align-items:center;
         }
@@ -122,7 +140,7 @@
         .dot { width:0.6rem; height:0.6rem; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s; }
         .dot.active { background:var(--accent); width:2rem; border-radius:1rem; }
 
-        /* MOBILE BLOCKS CONTAINER */
+        /* MOBILE BLOCKS CONTAINER (NASCOSTO DI BASE SU PC) */
         .project-media-mobile-container {
             display: none;
             flex-direction: column;
@@ -149,7 +167,7 @@
             pointer-events: none; border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* LIGHTBOX SYSTEM */
+        /* LIGHTBOX OVERLAY */
         .lightbox-overlay {
             position: fixed; inset: 0; background: rgba(10, 10, 10, 0.96);
             z-index: 999999; display: flex; align-items: center; justify-content: center;
@@ -192,12 +210,9 @@
 
         /* RESPONSIVE BREAKPOINTS */
         @media (max-width:1024px) {
-            .header { padding: 1.8rem 5%; }
-            .hero { grid-template-columns:1fr; padding: 12rem 5% 6rem; gap: 5rem; min-height: auto; }
+            .hero { grid-template-columns:1fr; padding-top:10rem; }
             .hero-desc { max-width:100%; }
-            .detail { padding: 6rem 5%; }
             .detail-grid { grid-template-columns:1fr; gap:4rem; }
-            .footer { padding: 2rem 5%; }
         }
         
         @media (max-width:768px) {
@@ -211,12 +226,33 @@
             .navbar.active { display:flex; }
             .navbar a { padding:1.2rem 0; font-size:1.7rem; border-bottom:1px solid rgba(255,255,255,0.05); }
             
-            /* FLOW MOBILE: Testi sopra, media e screenshot SOTTO */
-            .hero { display: flex; flex-direction: column; gap: 5rem; }
-            .hero-info { width: 100%; }
-            .hero-carousel { display: none !important; }
-            .project-media-mobile-container { display: flex; gap: 1.6rem; width: 100%; }
-            .mobile-media-holder { border-radius: 1.2rem; }
+            /* FLOW NATIVO MOBILE: Testi in alto, media e foto SOTTO */
+            .hero { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 5rem; 
+                padding: 12rem 5% 6rem;
+            }
+            
+            .hero-info { 
+                width: 100%; 
+            }
+            
+            /* Nascondiamo completamente il carosello desktop */
+            .hero-carousel { 
+                display: none !important; 
+            }
+            
+            /* Attiviamo e mostriamo la griglia verticale nativa mobile */
+            .project-media-mobile-container { 
+                display: flex; 
+                gap: 1.6rem;
+                width: 100%;
+            }
+            
+            .mobile-media-holder { 
+                border-radius: 1.2rem; 
+            }
         }
     </style>
 </head>
@@ -231,9 +267,7 @@
         <a href="../index.html#home">Home</a>
         <a href="../index.html#about">About</a>
         <a href="../index.html#services">Skills</a>
-        <a href="../index.html#demos">Demos</a>
         <a href="../index.html#portfolio" class="active">Projects</a>
-        <a href="../index.html#contact">Contact</a>
     </nav>
 </header>
 
@@ -247,6 +281,7 @@
         <div class="cta-row" id="proj-cta"></div>
     </div>
     
+    <!-- CONTENITORE PC: CAROUSEL -->
     <div class="hero-carousel" id="desktop-carousel-wrap">
         <div class="carousel-track-wrapper">
             <div class="carousel-track" id="track"></div>
@@ -256,6 +291,7 @@
         <div class="carousel-dots" id="dots"></div>
     </div>
 
+    <!-- CONTENITORE MOBILE: GRIGLIA VERTICALE (FINISCE SOTTO I TESTI) -->
     <div class="project-media-mobile-container" id="mobile-media-container"></div>
 </section>
 
@@ -273,7 +309,7 @@
             </div>
             <div class="info-card">
                 <h3>Key features</h3>
-                <div class="feat-list" id="proj-features"></div>
+                <div id="proj-features"></div>
             </div>
         </div>
     </div>
@@ -284,6 +320,7 @@
     <a href="#" aria-label="Back to top"><i class='bx bx-up-arrow-alt'></i></a>
 </footer>
 
+<!-- LIGHTBOX MARKUP -->
 <div class="lightbox-overlay" id="lightbox">
     <span class="lightbox-close" id="lightbox-close">&times;</span>
     <img src="" alt="Fullscreen preview" class="lightbox-img" id="lightbox-img">
@@ -296,9 +333,7 @@ const menuIcon = document.getElementById('menu-icon');
 const navbar   = document.querySelector('.navbar');
 menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
 
-const isMobileDevice = window.innerWidth <= 768 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
-
-// ── RENDER PROGETTO CON PROTEZIONE DEMO MOBILE ───────────
+// ── ENGINE GENERATORE DATI INLINE ────────────────────────
 function renderProject(p) {
     document.getElementById('page-title').textContent = p.title + ' - Portfolio - Andrea Bona';
     document.getElementById('page-desc').setAttribute('content', p.metaDesc || '');
@@ -318,27 +353,18 @@ function renderProject(p) {
     const tagEl = document.getElementById('proj-tags');
     p.tags.forEach(t => {
         const s = document.createElement('span');
-        s.className = 'tag'; s.textContent = t;
+        s.className = 'tag';
+        s.textContent = t;
         tagEl.appendChild(s);
     });
 
     const ctaEl = document.getElementById('proj-cta');
     p.cta.forEach(c => {
         const a = document.createElement('a');
-        const isGameAction = c.label.toLowerCase().includes('play') || c.label.toLowerCase().includes('demo');
-
-        if (isMobileDevice && isGameAction) {
-            a.className = 'btn-secondary';
-            a.innerHTML = `<i class='bx bx-desktop'></i> Gioca da PC`;
-            a.style.opacity = '0.5';
-            a.style.cursor = 'not-allowed';
-            a.style.pointerEvents = 'none';
-        } else {
-            a.href = c.href;
-            if (c.external) a.target = '_blank';
-            a.className = c.primary ? 'btn-primary' : 'btn-secondary';
-            a.innerHTML = `<i class='bx ${c.icon}'></i> ${c.label}`;
-        }
+        a.href = c.href;
+        if (c.external) a.target = '_blank';
+        a.className = c.primary ? 'btn-primary' : 'btn-secondary';
+        a.innerHTML = `<i class='bx ${c.icon}'></i> ${c.label}`;
         ctaEl.appendChild(a);
     });
 
@@ -346,7 +372,7 @@ function renderProject(p) {
     const mobileMediaContainer = document.getElementById('mobile-media-container');
 
     p.slides.forEach(s => {
-        // Popola desktop track
+        // 1. Popola carosello desktop
         const slideDiv = document.createElement('div');
         slideDiv.className = 'carousel-slide';
         if (s.type === 'video') {
@@ -356,7 +382,7 @@ function renderProject(p) {
         }
         track.appendChild(slideDiv);
 
-        // Popola mobile container
+        // 2. Popola contemporaneamente la griglia mobile verticale
         const mobileHolder = document.createElement('div');
         mobileHolder.className = 'mobile-media-holder';
         if (s.type === 'video') {
@@ -393,7 +419,7 @@ function renderProject(p) {
     });
 }
 
-// ── SLIDER DESKTOP ENGINE ─────────────────────────────────
+// ── ENGINE SLIDER DESKTOP ─────────────────────────────────
 function initCarousel() {
     const track   = document.getElementById('track');
     const slides  = track.querySelectorAll('.carousel-slide');
@@ -433,7 +459,7 @@ function initCarousel() {
     });
 }
 
-// ── LIGHTBOX SYSTEM ENGINE ───────────────────────────────
+// ── ENGINE LIGHTBOX SYSTEM ────────────────────────────────
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.getElementById('lightbox-close');
@@ -457,6 +483,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
 });
 
+// INITIALIZE
 document.addEventListener('DOMContentLoaded', () => {
     if (window.PROJECT_DATA) {
         renderProject(window.PROJECT_DATA);
@@ -467,7 +494,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script src="data/alpine-rescue.js?v=1.1"></script>
+<!-- FILE DATI DEL PROGETTO + CACHE BUSTER RIGIDO -->
+<script src="data/alpine-rescue.js?v=1.4"></script>
 
 </body>
 </html>

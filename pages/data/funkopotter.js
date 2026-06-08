@@ -31,8 +31,8 @@ window.PROJECT_DATA = {
         label:   "About the project",
         heading: "3D graphics meets game design",
         bodyHTML: `
-            <p><span>Funko Potter</span> was developed as part of the <span>Computer Graphics exam</span> at PoliTo, split into two distinct deliverables. The first was a <span>Blender render</span> exploring 3D modelling techniques. The second — and more complex — was an interactive <span>browser game built with X3DOM</span> and JavaScript, using real-time 3D graphics directly in the browser without plugins.</p>
-            <p>I designed a <span>dodge/attack combat game</span> featuring characters inspired by the Harry Potter universe rendered as Funko Pop figures. The game supports both <span>single player</span> and <span>local multiplayer</span> modes, with each character having unique skills. A significant part of my work was <span>balancing the characters</span> — tuning stats, attack patterns and abilities so that every matchup felt fair and strategically interesting rather than one-sided.</p>
+            <p><span>Funko Potter</span> was developed as part of the <span>Computer Graphics exam</span> at PoliTo, split into two distinct deliverables. The first was a <span>Blender render</span> exploring 3D modelling techniques. The second - and more complex - was an interactive <span>browser game built with X3DOM</span> and JavaScript, using real-time 3D graphics directly in the browser without plugins.</p>
+            <p>I designed a <span>dodge/attack combat game</span> featuring characters inspired by the Harry Potter universe rendered as Funko Pop figures. The game supports both <span>single player</span> and <span>local multiplayer</span> modes, with each character having unique skills. A significant part of my work was <span>balancing the characters</span> - tuning stats, attack patterns and abilities so that every matchup felt fair and strategically interesting rather than one-sided.</p>
             <p>The main technical challenge was <span>implementing responsive gameplay entirely within X3DOM</span>, a library designed primarily for 3D visualisation rather than games. Handling input, collision, game state and animation within its constraints required creative problem-solving and a solid understanding of the underlying WebGL rendering model.</p>
         `,
     },
@@ -42,7 +42,7 @@ window.PROJECT_DATA = {
         { label: "3D Tool",    value: "Blender"            },
         { label: "Platform",   value: "Browser"            },
         { label: "Modes",      value: "Single & Local MP"  },
-        { label: "Context",    value: "PoliTo — Computer Graphics exam" },
+        { label: "Context",    value: "PoliTo - Computer Graphics exam" },
     ],
 
     features: [

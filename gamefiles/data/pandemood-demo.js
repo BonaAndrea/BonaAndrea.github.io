@@ -1,6 +1,6 @@
 window.DEMO_DATA = {
-    title:    "Pandemood — Demo",
-    metaDesc: "Play Pandemood — a puzzle-platformer about emotions in a post-Covid world, developed in Unity.",
+    title:    "Pandemood - Demo",
+    metaDesc: "Play Pandemood - a puzzle-platformer about emotions in a post-Covid world, developed in Unity.",
     category:  "Puzzle Platformer · Unity",
     titleHTML: "Pande<span>mood</span>",
     meta: [
@@ -8,7 +8,7 @@ window.DEMO_DATA = {
         { icon: "bx-desktop",   text: "Browser"      },
         { icon: "bx-group",     text: "Team of 6"    },
     ],
-    shortDesc: "A puzzle-platformer set in a post-Covid world exploring the importance of emotions. Branching dialogue, precise platforming and object interactions — playable directly in the browser.",
+    shortDesc: "A puzzle-platformer set in a post-Covid world exploring the importance of emotions. Branching dialogue, precise platforming and object interactions - playable directly in the browser.",
     tags: ["Unity", "C#", "Platformer", "Dialogue System"],
     cta: [
         { label: "Project details", icon: "bx-info-circle", href: "../../pages/pandemood.html", primary: false, external: false },
