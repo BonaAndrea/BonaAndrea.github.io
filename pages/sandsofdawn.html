@@ -8,6 +8,7 @@
     <meta name="description" id="page-desc" content="">
     <link rel="icon" href="../images/webicon2.png" type="image/x-icon">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/navbar.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
@@ -24,41 +25,44 @@
         body { background:var(--bg); color:var(--text); font-family:'Poppins',sans-serif; min-height:100vh; }
         a { text-decoration:none; color:inherit; }
 
-        /* HEADER */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.8rem 9%;
-    background: rgba(31, 36, 45, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
+        /* HEADER INTEGRATION */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.8rem 9%;
+            background: rgba(31, 36, 45, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
         .navbar a,
         .back-btn {
             font-size: 1.5rem;
             color: rgba(255,255,255,0.7);
             transition: color 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .back-btn:hover { color:var(--accent); }
         .back-btn i,
         #menu-icon {
             color: rgba(255,255,255,0.85);
         }
-        .navbar { display:flex; gap:3.5rem; }
+        .navbar { display:flex; gap:3.5rem; align-items: center; }
         .navbar a { font-size:1.5rem; color:var(--muted); transition:color 0.3s; }
         .navbar a:hover,
         .navbar a.active,
         .back-btn:hover {
             color: var(--accent);
         }       
- #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
+        #menu-icon { font-size:3rem; color:var(--text); display:none; cursor:pointer; }
 
         /* HERO LAYOUT DESKTOP */
         .hero {
@@ -140,7 +144,7 @@
         .dot { width:0.6rem; height:0.6rem; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s; }
         .dot.active { background:var(--accent); width:2rem; border-radius:1rem; }
 
-        /* MOBILE BLOCKS CONTAINER (NASCOSTO DI BASE SU PC) */
+        /* MOBILE BLOCKS CONTAINER */
         .project-media-mobile-container {
             display: none;
             flex-direction: column;
@@ -218,41 +222,18 @@
         @media (max-width:768px) {
             html { font-size:55%; }
             #menu-icon { display:block; }
-            .navbar {
-                position:absolute; top:100%; left:0; width:100%;
-                flex-direction:column; gap:0; background:var(--bg);
-                border-top:1px solid rgba(255,255,255,0.07); display:none; padding:1rem 9%;
-            }
-            .navbar.active { display:flex; }
-            .navbar a { padding:1.2rem 0; font-size:1.7rem; border-bottom:1px solid rgba(255,255,255,0.05); }
             
-            /* FLOW NATIVO MOBILE: Testi in alto, media e foto SOTTO */
+            /* FLOW NATIVO MOBILE */
             .hero { 
                 display: flex; 
                 flex-direction: column; 
                 gap: 5rem; 
                 padding: 12rem 5% 6rem;
             }
-            
-            .hero-info { 
-                width: 100%; 
-            }
-            
-            /* Nascondiamo completamente il carosello desktop */
-            .hero-carousel { 
-                display: none !important; 
-            }
-            
-            /* Attiviamo e mostriamo la griglia verticale nativa mobile */
-            .project-media-mobile-container { 
-                display: flex; 
-                gap: 1.6rem;
-                width: 100%;
-            }
-            
-            .mobile-media-holder { 
-                border-radius: 1.2rem; 
-            }
+            .hero-info { width: 100%; }
+            .hero-carousel { display: none !important; }
+            .project-media-mobile-container { display: flex; gap: 1.6rem; width: 100%; }
+            .mobile-media-holder { border-radius: 1.2rem; }
         }
     </style>
 </head>
@@ -260,14 +241,28 @@
 
 <header class="header">
     <a href="../index.html#portfolio" class="back-btn">
-        <i class='bx bx-arrow-back'></i><span>Projects</span>
+        <i class='bx bx-arrow-back'></i><span data-i18n="nav_projects">Projects</span>
     </a>
     <i class='bx bx-menu' id="menu-icon"></i>
     <nav class="navbar">
-        <a href="../index.html#home">Home</a>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#services">Skills</a>
-        <a href="../index.html#portfolio" class="active">Projects</a>
+        <a href="../index.html#home" data-i18n="nav_home">Home</a>
+        <a href="../index.html#about" data-i18n="nav_about">About</a>
+        <a href="../index.html#services" data-i18n="nav_skills">Skills</a>
+        <a href="../index.html#portfolio" class="active" data-i18n="nav_projects">Projects</a>
+
+        <!-- DROPDOWN CUSTOM INTEGRATO NELL'HEADER -->
+        <div class="custom-dropdown" id="lang-dropdown">
+            <div class="dropdown-selected">
+                <span class="selected-flag">🇬🇧</span> <span class="selected-text">EN</span>
+                <i class='bx bx-chevron-down dropdown-arrow'></i>
+            </div>
+            <ul class="dropdown-options">
+                <li data-value="en" class="active">🇬🇧 EN</li>
+                <li data-value="it">🇮🇹 IT</li>
+                <li data-value="fr">🇫🇷 FR</li>
+                <li data-value="es">🇪🇸 ES</li>
+            </ul>
+        </div>
     </nav>
 </header>
 
@@ -291,7 +286,7 @@
         <div class="carousel-dots" id="dots"></div>
     </div>
 
-    <!-- CONTENITORE MOBILE: GRIGLIA VERTICALE (FINISCE SOTTO I TESTI) -->
+    <!-- CONTENITORE MOBILE -->
     <div class="project-media-mobile-container" id="mobile-media-container"></div>
 </section>
 
@@ -304,11 +299,11 @@
         </div>
         <div class="detail-sidebar">
             <div class="info-card">
-                <h3>Project info</h3>
+                <h3 data-i18n="proj_info_title">Project info</h3>
                 <div id="proj-info-rows"></div>
             </div>
             <div class="info-card">
-                <h3>Key features</h3>
+                <h3 data-i18n="proj_features_title">Key features</h3>
                 <div id="proj-features"></div>
             </div>
         </div>
@@ -326,32 +321,114 @@
     <img src="" alt="Fullscreen preview" class="lightbox-img" id="lightbox-img">
 </div>
 
+<!-- FILE TRADUZIONI STRUTTURALI GLOBALI -->
+<script src="../js/translations.js"></script>
+
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
+// ── NAVIGAZIONE MOBILE RESPONSIVE ──
 const menuIcon = document.getElementById('menu-icon');
 const navbar   = document.querySelector('.navbar');
-menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
+if (menuIcon && navbar) {
+    menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
+}
 
-// ── ENGINE GENERATORE DATI INLINE ────────────────────────
-function renderProject(p) {
-    document.getElementById('page-title').textContent = p.title + ' - Portfolio - Andrea Bona';
-    document.getElementById('page-desc').setAttribute('content', p.metaDesc || '');
-    document.getElementById('proj-category').textContent = p.category;
-    document.getElementById('proj-title').innerHTML = p.titleHTML;
+// ── REGOLATORE ENGINE LINGUA ULTRA-PROTETTO ──
+function getInitialLanguage() {
+    const supportedLanguages = ['en', 'it', 'fr', 'es'];
+    
+    // 1. Forza il controllo sul localStorage pulendo robaccia
+    let savedLang = localStorage.getItem('preferred_lang');
+    if (savedLang === 'null' || savedLang === 'undefined' || savedLang === '') {
+        localStorage.removeItem('preferred_lang');
+        savedLang = null;
+    }
+    
+    if (savedLang && supportedLanguages.includes(savedLang.toLowerCase())) {
+        console.log("🔍 [i18n Trace] Trovato nel localStorage:", savedLang.toLowerCase());
+        return savedLang.toLowerCase();
+    }
+
+    // 2. Controllo Firefox nativo
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang) {
+        const shortLang = browserLang.toLowerCase().split('-')[0];
+        if (supportedLanguages.includes(shortLang)) {
+            console.log("🔍 [i18n Trace] Rilevato da impostazioni browser:", shortLang);
+            return shortLang;
+        }
+    }
+    
+    console.log("🔍 [i18n Trace] Fallback finale su: en");
+    return 'en';
+}
+
+function applyStructuralTranslations(lang) {
+    if (typeof translations === 'undefined') {
+        console.error("❌ [i18n Error] Dizionario 'translations' NON TROVATO!");
+        return;
+    }
+    
+    const supportedLanguages = ['en', 'it', 'fr', 'es'];
+    if (!lang || !supportedLanguages.includes(lang.toLowerCase())) {
+        console.warn("⚠️ [i18n Anti-Bug] Tentativo di salvare lingua non valida bloccato:", lang);
+        return;
+    }
+
+    const finalLang = lang.toLowerCase();
+    console.log("🚀 [i18n Action] Applicazione traduzioni navbar in:", finalLang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[finalLang] && translations[finalLang][key]) {
+            el.innerHTML = translations[finalLang][key];
+        }
+    });
+    
+    // Scrive nel localStorage SOLO stringhe valide certificate
+    localStorage.setItem('preferred_lang', finalLang);
+}
+
+// ── ENGINE GENERATORE DATI INLINE CORRETTO ──
+function renderProject(p, lang) {
+    console.log("🎨 [Render] Chiamato renderProject con lingua richiesta:", lang);
+    
+    document.getElementById('proj-meta').innerHTML = "";
+    document.getElementById('proj-tags').innerHTML = "";
+    document.getElementById('proj-cta').innerHTML = "";
+    document.getElementById('track').innerHTML = "";
+    document.getElementById('mobile-media-container').innerHTML = "";
+    document.getElementById('proj-info-rows').innerHTML = "";
+    document.getElementById('proj-features').innerHTML = "";
+
+    const supportedLanguages = ['en', 'it', 'fr', 'es'];
+    const finalLang = supportedLanguages.includes(lang) ? lang : 'en';
+
+    // Se manca il blocco della lingua (es: manca 'it' in sandsofdawn.js), usa 'en'
+    if (!p[finalLang]) {
+        console.warn(`⚠️ [Render Fallback] Il file dati del progetto non ha il blocco '${finalLang}'. Uso il fallback inglese.`);
+    }
+
+    const data = p[finalLang] || p['en'];
+
+    document.getElementById('page-title').textContent = data.title + ' - Portfolio - Andrea Bona';
+    document.getElementById('page-desc').setAttribute('content', data.metaDesc || '');
+    document.getElementById('proj-category').textContent = data.category;
+    document.getElementById('proj-title').innerHTML = data.titleHTML;
+    document.getElementById('proj-desc').textContent = data.shortDesc;
 
     const metaEl = document.getElementById('proj-meta');
-    p.meta.forEach(m => {
+    data.meta.forEach(m => {
         const pill = document.createElement('span');
         pill.className = 'meta-pill';
         pill.innerHTML = `<i class='bx ${m.icon}'></i> ${m.text}`;
         metaEl.appendChild(pill);
     });
 
-    document.getElementById('proj-desc').textContent = p.shortDesc;
-
+    const projectTags = p.tags || data.tags || [];
     const tagEl = document.getElementById('proj-tags');
-    p.tags.forEach(t => {
+    projectTags.forEach(t => {
         const s = document.createElement('span');
         s.className = 'tag';
         s.textContent = t;
@@ -359,7 +436,7 @@ function renderProject(p) {
     });
 
     const ctaEl = document.getElementById('proj-cta');
-    p.cta.forEach(c => {
+    data.cta.forEach(c => {
         const a = document.createElement('a');
         a.href = c.href;
         if (c.external) a.target = '_blank';
@@ -371,8 +448,8 @@ function renderProject(p) {
     const track = document.getElementById('track');
     const mobileMediaContainer = document.getElementById('mobile-media-container');
 
-    p.slides.forEach(s => {
-        // 1. Popola carosello desktop
+    const projectSlides = p.slides || data.slides || [];
+    projectSlides.forEach(s => {
         const slideDiv = document.createElement('div');
         slideDiv.className = 'carousel-slide';
         if (s.type === 'video') {
@@ -382,7 +459,6 @@ function renderProject(p) {
         }
         track.appendChild(slideDiv);
 
-        // 2. Popola contemporaneamente la griglia mobile verticale
         const mobileHolder = document.createElement('div');
         mobileHolder.className = 'mobile-media-holder';
         if (s.type === 'video') {
@@ -398,12 +474,12 @@ function renderProject(p) {
         mobileMediaContainer.appendChild(mobileHolder);
     });
 
-    document.getElementById('detail-label').textContent   = p.detail.label;
-    document.getElementById('detail-heading').textContent = p.detail.heading;
-    document.getElementById('detail-body').innerHTML      = p.detail.bodyHTML;
+    document.getElementById('detail-label').textContent   = data.detail.label;
+    document.getElementById('detail-heading').textContent = data.detail.heading;
+    document.getElementById('detail-body').innerHTML      = data.detail.bodyHTML;
 
     const rowsEl = document.getElementById('proj-info-rows');
-    p.info.forEach(r => {
+    data.info.forEach(r => {
         const div = document.createElement('div');
         div.className = 'info-row';
         div.innerHTML = `<span class="label">${r.label}</span><span class="value">${r.value}</span>`;
@@ -411,7 +487,7 @@ function renderProject(p) {
     });
 
     const featEl = document.getElementById('proj-features');
-    p.features.forEach(f => {
+    data.features.forEach(f => {
         const div = document.createElement('div');
         div.className = 'feat-item';
         div.innerHTML = `<i class='bx ${f.icon}'></i> ${f.text}`;
@@ -420,6 +496,7 @@ function renderProject(p) {
 }
 
 // ── ENGINE SLIDER DESKTOP ─────────────────────────────────
+let goToGlobal = null; 
 function initCarousel() {
     const track   = document.getElementById('track');
     const slides  = track.querySelectorAll('.carousel-slide');
@@ -427,6 +504,7 @@ function initCarousel() {
     const total   = slides.length;
     let current   = 0;
 
+    dotsEl.innerHTML = ""; 
     if (total === 0) return;
 
     slides.forEach((_, i) => {
@@ -442,21 +520,16 @@ function initCarousel() {
         dotsEl.querySelectorAll('.dot').forEach((d, i) =>
             d.classList.toggle('active', i === current));
     }
+    goToGlobal = goTo;
+
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    
+    prevBtn.replaceWith(prevBtn.cloneNode(true));
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
 
     document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
     document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-
-    let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive:true });
-    track.addEventListener('touchend', e => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
-    });
 }
 
 // ── ENGINE LIGHTBOX SYSTEM ────────────────────────────────
@@ -479,22 +552,71 @@ if (lightbox) {
         if (e.target === lightbox) closeLightbox();
     });
 }
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-});
 
-// INITIALIZE
+// ── SETUP INITIALIZATION & DROPDOWN ENGINE ────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("🏁 [DOM] Caricato. Avvio inizializzazione pagina progetto.");
+    const dropdown = document.getElementById('lang-dropdown');
+    const initialLang = getInitialLanguage(); 
+
+    if (dropdown) {
+        const selectedBtn = dropdown.querySelector('.dropdown-selected');
+        const selectedFlag = dropdown.querySelector('.selected-flag');
+        const selectedText = dropdown.querySelector('.selected-text');
+        const options = dropdown.querySelectorAll('.dropdown-options li');
+
+        function syncDropdownUI(lang) {
+            options.forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('data-value') === lang) {
+                    opt.classList.add('active');
+                    const content = opt.textContent.trim().split(' ');
+                    if (selectedFlag) selectedFlag.textContent = content[0];
+                    if (selectedText) selectedText.textContent = content[1];
+                }
+            });
+        }
+
+        selectedBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const targetLang = this.getAttribute('data-value');
+                console.log("🖱️ [Dropdown Click] Selezione manuale utente:", targetLang);
+                
+                applyStructuralTranslations(targetLang);
+                syncDropdownUI(targetLang);
+                
+                if (window.PROJECT_DATA) {
+                    renderProject(window.PROJECT_DATA, targetLang);
+                    initCarousel();
+                }
+                dropdown.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('active');
+        });
+
+        syncDropdownUI(initialLang);
+    }
+
+    applyStructuralTranslations(initialLang);
+
     if (window.PROJECT_DATA) {
-        renderProject(window.PROJECT_DATA);
+        renderProject(window.PROJECT_DATA, initialLang);
         initCarousel();
     } else {
-        console.error('PROJECT_DATA non trovato.');
+        console.error('❌ [Critical Error] window.PROJECT_DATA non trovato.');
     }
 });
 </script>
-
-<!-- FILE DATI DEL PROGETTO + CACHE BUSTER RIGIDO -->
+<!-- FILE DATI DEL PROGETTO -->
 <script src="data/sandsofdawn.js?v=1.4"></script>
 
 </body>

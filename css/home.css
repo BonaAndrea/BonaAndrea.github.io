@@ -178,3 +178,20 @@ span { color: var(--main-color); }
 @media (max-width: 617px) { .portfolio-container { grid-template-columns: 1fr; } }
 @media (max-width: 450px) { html { font-size: 50%; } }
 @media (max-width: 375px) { .home-img img { width: 90vw; } .home-text { margin: 0 20px 0 -5px; } .about-img img { width: 90vw; } .footer { flex-direction: column-reverse; } .footer p { text-align: center; margin-top: 2rem; } }
+
+
+/* Forza il testo fisso "and I'm" a rimanere bianco */
+.Second.h3 [data-i18n="home_iam"] {
+    color: #ffffff !important;
+}
+
+/* Forza l'articolo "a/an/un/uno" a rimanere bianco */
+#vowel-fix {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+/* Solo ed esclusivamente la stringa dinamica generata da Typed deve essere azzurra */
+.multiple-text {
+    color: var(--main-color, #00eeff) !important;
+}

@@ -49,8 +49,23 @@
         display: block !important;
     }
 
-    /* Fix colore vocale */
-    #vowel-fix { color: #fff !important; font-weight: 700; }
+    /* Fix colori e stili per il testo della Home per evitare sbrogolamenti di Typed */
+    .Second.h3 { 
+        color: #fff !important; 
+    }
+
+    .Second.h3 [data-i18n="home_iam"] {
+        color: #ffffff !important;
+    }
+
+    #vowel-fix { 
+        color: #fff !important; 
+        font-weight: 700; 
+    }
+
+    .multiple-text {
+        color: var(--main-color, #00eeff) !important;
+    }
 
     /* Layout mobile (schermi stretti) */
     @media (max-width: 768px) {
@@ -59,8 +74,6 @@
         .home-img img { width: 70vw !important; margin-bottom: 4rem !important; }
     }
 </style>
-
-
 </head>
 
 <body>
@@ -69,24 +82,37 @@
         <a href="#" class="logo">Andrea <span>Bona</span></a>
         <i class='bx bx-menu' id="menu-icon"></i>
         <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Skills</a>
-            <a href="#portfolio">Projects</a>
+            <a href="#home" data-i18n="nav_home">Home</a>
+            <a href="#about" data-i18n="nav_about">About</a>
+            <a href="#services" data-i18n="nav_skills">Skills</a>
+            <a href="#portfolio" data-i18n="nav_projects">Projects</a>
+            
+<div class="custom-dropdown" id="lang-dropdown">
+    <div class="dropdown-selected">
+        <span class="selected-flag">🇬🇧</span> <span class="selected-text">EN</span>
+        <i class='bx bx-chevron-down dropdown-arrow'></i>
+    </div>
+    <ul class="dropdown-options">
+        <li data-value="en" class="active">🇬🇧 EN</li>
+        <li data-value="it">🇮🇹 IT</li>
+        <li data-value="fr">🇫🇷 FR</li>
+        <li data-value="es">🇪🇸 ES</li>
+    </ul>
+</div>
         </nav>
     </header>
-
+        
     <section class="home" id="home">
         <div class="home-content">
             <div class="home-text">
-                <h3>Hi! My name is</h3>
+                <h3 data-i18n="home_hi">Hi! My name is</h3>
                 <h1>Andrea Bona</h1>
-                <h3 class="Second h3">and I'm <span id="vowel-fix">a</span> <span class="multiple-text"></span></h3>
+                <h3 class="Second h3"><span data-i18n="home_iam">and I'm</span> <span id="vowel-fix">a</span> <span class="multiple-text"></span></h3>
                 <div class="social-media">
                     <a href="https://www.linkedin.com/in/andrea-bona/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
                     <a href="https://github.com/BonaAndrea" target="_blank"><i class='bx bxl-github'></i></a>
                 </div>
-                <a href="https://drive.google.com/file/d/1r_RuRorfQmGWAdedwRGTuUd4Z3Jm8F9q/view?usp=drive_link" target="_blank" class="btn">Download CV</a>
+                <a href="https://drive.google.com/file/d/1r_RuRorfQmGWAdedwRGTuUd4Z3Jm8F9q/view?usp=drive_link" target="_blank" class="btn" data-i18n="btn_cv">Download CV</a>
             </div>
         </div>
         <div class="home-img">
@@ -99,130 +125,175 @@
             <img src="images/me1.png" alt="Andrea Bona">
         </div>
         <div class="about-content">
-            <h2 class="heading">About <span>me</span></h2>
-            <p>Computer Engineering graduate from Politecnico di Torino, with a Master's degree and a focus on interactive systems and real-time graphics. I've been building games and VR experiences since 2021 — across internships, studios and personal projects — always with the same goal: make it <span>feel good to play</span>.</p>
+            <h2 class="heading" data-i18n="about_heading">About <span>me</span></h2>
+            <p data-i18n="about_description">Computer Engineering graduate from Politecnico di Torino, with a Master's degree and a focus on interactive systems and real-time graphics. I've been building games and VR experiences since 2021 - across internships, studios and personal projects - always with the same goal: make it <span>feel good to play</span>.</p>
 
             <div class="about-stats">
-                <div class="stat-item"><span class="stat-number" data-target="8">0</span><span class="stat-label">Projects shipped</span></div>
-                <div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-label">VR apps</span></div>
-                <div class="stat-item"><span class="stat-number" data-target="2">0</span><span class="stat-label">Engines</span></div>
-                <div class="stat-item"><span class="stat-number" data-target="4">0</span><span class="stat-label">Years exp.</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="8">0</span><span class="stat-label" data-i18n="stat_projects">Projects shipped</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-label" data-i18n="stat_vr">VR apps</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="2">0</span><span class="stat-label" data-i18n="stat_engines">Engines</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="4">0</span><span class="stat-label" data-i18n="stat_exp">Years exp.</span></div>
             </div>
 
             <div class="timeline">
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-year">2021</span><h4>Unity Developer Intern — Funix SRLS</h4><p>Built and optimised two VR applications for Oculus Quest 2.</p></div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-year">2022 – 2023</span><h4>Unity Developer — TGE Ventures SRL</h4><p>Shipped multiple WebGL arcade games across different genres.</p></div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-year">2024 – present</span><h4>Advanced Solutions Engineer — NTT Data</h4><p>Working in enterprise software while continuing to develop games independently.</p></div></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2021</span>
+                        <h4 data-i18n="timeline_job1_title">Unity Developer Intern - Funix SRLS</h4>
+                        <p data-i18n="timeline_job1_desc">Built and optimised two VR applications for Oculus Quest 2.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2022 – 2023</span>
+                        <h4 data-i18n="timeline_job2_title">Unity Developer - TGE Ventures SRL</h4>
+                        <p data-i18n="timeline_job2_desc">Shipped multiple WebGL arcade games across different genres.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024 – present</span>
+                        <h4 data-i18n="timeline_job3_title">Advanced Solutions Engineer - NTT Data</h4>
+                        <p data-i18n="timeline_job3_desc">Working in enterprise software while continuing to develop games independently.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="services" id="services">
-        <h2 class="heading">My <span>Skills</span></h2>
+        <h2 class="heading" data-i18n="skills_heading">My <span>Skills</span></h2>
         <div class="services-container">
-            <div class="services-box"><i class='bx bx-code-alt'></i><h3>Gameplay Programming</h3><p class="skill-desc">Crafting precise, responsive mechanics across multiple genres.</p><div class="skill-tags"><span class="skill-tag">C#</span><span class="skill-tag">C++</span></div></div>
-            <div class="services-box"><i class='bx bx-game'></i><h3>Game Design</h3><p class="skill-desc">Designing engaging loops and player experience.</p><div class="skill-tags"><span class="skill-tag">Level Design</span><span class="skill-tag">Balancing</span></div></div>
-            <div class="services-box"><i class='bx bx-user'></i><h3>User Experience</h3><p class="skill-desc">Designing intuitive interfaces and natural VR interactions.</p><div class="skill-tags"><span class="skill-tag">UI Design</span><span class="skill-tag">VR UX</span></div></div>
-            <div class="services-box"><i class='bx bxl-unity'></i><h3>Unity Development</h3><p class="skill-desc">Proficient in URP, optimization and cross-platform deployment.</p><div class="skill-tags"><span class="skill-tag">URP</span><span class="skill-tag">Oculus</span></div></div>
-            <div class="services-box"><img src="images/icons/unreal-engine.svg" alt="Unreal Engine" class="icon"><h3>Unreal Engine</h3><p class="skill-desc">Building games in UE5 with C++ and Blueprints.</p><div class="skill-tags"><span class="skill-tag">C++</span><span class="skill-tag">UE5</span></div></div>
+            <div class="services-box">
+                <i class='bx bx-code-alt'></i>
+                <h3 data-i18n="skill_gameplay_title">Gameplay Programming</h3>
+                <p class="skill-desc" data-i18n="skill_gameplay_desc">Crafting precise, responsive mechanics across multiple genres.</p>
+                <div class="skill-tags"><span class="skill-tag">C#</span><span class="skill-tag">C++</span></div>
+            </div>
+            <div class="services-box">
+                <i class='bx bx-game'></i>
+                <h3 data-i18n="skill_design_title">Game Design</h3>
+                <p class="skill-desc" data-i18n="skill_design_desc">Designing engaging loops and player experience.</p>
+                <div class="skill-tags"><span class="skill-tag">Level Design</span><span class="skill-tag">Balancing</span></div>
+            </div>
+            <div class="services-box">
+                <i class='bx bx-user'></i>
+                <h3 data-i18n="skill_ux_title">User Experience</h3>
+                <p class="skill-desc" data-i18n="skill_ux_desc">Designing intuitive interfaces and natural VR interactions.</p>
+                <div class="skill-tags"><span class="skill-tag">UI Design</span><span class="skill-tag">VR UX</span></div>
+            </div>
+            <div class="services-box">
+                <i class='bx bxl-unity'></i>
+                <h3 data-i18n="skill_unity_title">Unity Development</h3>
+                <p class="skill-desc" data-i18n="skill_unity_desc">Proficient in URP, optimization and cross-platform deployment.</p>
+                <div class="skill-tags"><span class="skill-tag">URP</span><span class="skill-tag">Oculus</span></div>
+            </div>
+            <div class="services-box">
+                <img src="images/icons/unreal-engine.svg" alt="Unreal Engine" class="icon">
+                <h3 data-i18n="skill_unreal_title">Unreal Engine</h3>
+                <p class="skill-desc" data-i18n="skill_unreal_desc">Building games in UE5 with C++ and Blueprints.</p>
+                <div class="skill-tags"><span class="skill-tag">C++</span><span class="skill-tag">UE5</span></div>
+            </div>
         </div>
     </section>
 
-<section class="portfolio" id="portfolio">
-    <h2 class="heading">Latest <span>Projects</span></h2>
+    <section class="portfolio" id="portfolio">
+        <h2 class="heading" data-i18n="projects_heading">Latest <span>Projects</span></h2>
 
-    <div class="portfolio-container">
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/sands-of-dawn/Logo.png" alt="Sands of Dawn">
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/sands-of-dawn/Logo.png" alt="Sands of Dawn">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Sands of Dawn</h4>
+                    <p data-i18n="project_sands_desc">First Unreal Engine game, start to finish, including UI and sounds.</p>
+                    <a href="pages/sandsofdawn.html"><i class='bx bx-link-external'></i></a>
+                </div>
             </div>
-            <div class="portfolio-layer">
-                <h4>Sands of Dawn</h4>
-                <p>First Unreal Engine game, start to finish, including UI and sounds.</p>
-                <a href="pages/sandsofdawn.html"><i class='bx bx-link-external'></i></a>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/arcade-games.png" alt="Arcade Games">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Arcade Games</h4>
+                    <p data-i18n="project_arcade_desc">Designed, implemented and QA'd multiple arcade games including platformers and puzzle games.</p>
+                    <a href="pages/arcade-games.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/alpine-rescue/alpine4.png" alt="Alpine Rescue 2.0">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Alpine Rescue 2.0</h4>
+                    <p data-i18n="project_alpine2_desc">Remake with updated visuals, better gameplay and improved optimization. Ongoing.</p>
+                    <a href="pages/alpine-rescue2.0.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/begenius/begenius1.jpg" alt="Elitech BeGenius VR">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Elitech BeGenius VR</h4>
+                    <p data-i18n="project_begenius_desc">VR experience design, UX, sound design and optimization for Oculus Quest 2.</p>
+                    <a href="pages/begeniusvr.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/frejusvr/frejusvr2.jpg" alt="FrejusVR">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>FrejusVR</h4>
+                    <p data-i18n="project_frejus_desc">Ported to URP, optimized for Oculus Quest 2 and QA.</p>
+                    <a href="pages/frejusvr.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/pandemood/pandemoodlogo.png" alt="Pandemood">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Pandemood</h4>
+                    <p data-i18n="project_pandemood_desc">Gameplay mechanics, UI and dialogue system for a puzzle-platformer.</p>
+                    <a href="pages/pandemood.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/alpine-rescue/logo2.png" alt="Alpine Rescue">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Alpine Rescue</h4>
+                    <p data-i18n="project_alpine1_desc">VR app design with a focus on user experience and basic AI.</p>
+                    <a href="pages/alpine-rescue.html"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <div class="card-img-wrap">
+                    <img src="images/funko-potter/logo.png" alt="Funko Potter">
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Funko Potter</h4>
+                    <p data-i18n="project_funko_desc">Designed and implemented a balanced interactive game using X3DOM.</p>
+                    <a href="pages/funko-potter.html"><i class='bx bx-link-external'></i></a>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/arcade-games.png" alt="Arcade Games">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Arcade Games</h4>
-                <p>Designed, implemented and QA'd multiple arcade games including platformers and puzzle games.</p>
-                <a href="pages/arcade-games.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/alpine-rescue/alpine4.png" alt="Alpine Rescue 2.0">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Alpine Rescue 2.0</h4>
-                <p>Remake with updated visuals, better gameplay and improved optimization. Ongoing.</p>
-                <a href="pages/alpine-rescue2.0.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/begenius/begenius1.jpg" alt="Elitech BeGenius VR">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Elitech BeGenius VR</h4>
-                <p>VR experience design, UX, sound design and optimization for Oculus Quest 2.</p>
-                <a href="pages/begeniusvr.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/frejusvr/frejusvr2.jpg" alt="FrejusVR">
-            </div>
-            <div class="portfolio-layer">
-                <h4>FrejusVR</h4>
-                <p>Ported to URP, optimized for Oculus Quest 2 and QA.</p>
-                <a href="pages/frejusvr.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/pandemood/pandemoodlogo.png" alt="Pandemood">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Pandemood</h4>
-                <p>Gameplay mechanics, UI and dialogue system for a puzzle-platformer.</p>
-                <a href="pages/pandemood.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/alpine-rescue/logo2.png" alt="Alpine Rescue">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Alpine Rescue</h4>
-                <p>VR app design with a focus on user experience and basic AI.</p>
-                <a href="pages/alpine-rescue.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <div class="card-img-wrap">
-                <img src="images/funko-potter/logo.png" alt="Funko Potter">
-            </div>
-            <div class="portfolio-layer">
-                <h4>Funko Potter</h4>
-                <p>Designed and implemented a balanced interactive game using X3DOM.</p>
-                <a href="pages/funko-potter.html"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-    </div>
-</section>
     <footer class="footer">
         <div class="footer-text"><p>Copyright &copy; <span id="currentYear"></span> by Andrea Bona | All Rights Reserved.</p></div>
         <div class="footer-iconTop"><a href="#home" aria-label="Back to top"><i class='bx bx-up-arrow-alt'></i></a></div>
@@ -237,33 +308,13 @@
     </div>
 
     <script src="https://unpkg.com/scrollreveal"></script>
-<script src="https://unpkg.com/typed.js@2.0.132/dist/typed.umd.js"></script>
-<script src="js/index.js"></script>
-<script>
-const roles = [
-    'game developer',
-    'game designer',
-    'Unity developer',
-    'gameplay programmer',
-    'Unreal Engine developer'
-];
-
-const typed = new Typed('.multiple-text', {
-    strings: roles,
-    typeSpeed: 100,
-    backSpeed: 100,
-    backDelay: 1000,
-    loop: true,
-
-preStringTyped: function(arrayPos) {
-    console.log(arrayPos);
-
-    document.getElementById('vowel-fix').textContent =
-        arrayPos === 4 ? 'an' : 'a';
-}
-
-});
-</script>  
-  <script>document.getElementById("currentYear").innerHTML = new Date().getFullYear();</script>
+    <script src="https://unpkg.com/typed.js@2.0.132/dist/typed.umd.js"></script>
+    
+    <script src="js/translations.js"></script>
+    <script src="js/index.js"></script>
+    
+    <script>
+        document.getElementById("currentYear").innerHTML = new Date().getFullYear();
+    </script>
 </body>
 </html>

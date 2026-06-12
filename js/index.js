@@ -5,6 +5,7 @@ let tombRaiderFound = false;
 let overlayTimeout = null;
 let hideTimeout = null;
 let isOverlayActive = false;
+let typedInstance = null; // Riferimento globale per Typed per impedirne istanze multiple concorrenti
 
 const memories = [
     "Every project is a world I once built.",
@@ -29,16 +30,107 @@ const GAME_ACHIEVEMENTS = {
     tombRaider: { title: "Tomb Raider", desc: "Discovered the ancient developer artifact.", icon: "🏺" }
 };
 
+// ── RILEVAMENTO DELLA LINGUA DI PARTENZA (Sincronizzato con localStorage) ──
+function getInitialLanguage() {
+    const supportedLanguages = ['en', 'it', 'fr', 'es'];
+    
+    // 1. Leggi e valida il localStorage
+    let savedLang = localStorage.getItem('preferred_lang');
+    if (savedLang === 'null' || savedLang === 'undefined') {
+        localStorage.removeItem('preferred_lang');
+        savedLang = null;
+    }
+    
+    if (savedLang && supportedLanguages.includes(savedLang.toLowerCase())) {
+        console.log("i18n Debug: Trovata lingua nel localStorage ->", savedLang);
+        return savedLang.toLowerCase();
+    }
+
+    // 2. Leggi e valida la stringa di Firefox
+    const browserLang = navigator.language || navigator.userLanguage;
+    console.log("i18n Debug: Stringa nativa restituita da Firefox ->", browserLang);
+
+    if (browserLang) {
+        // Pulizia avanzata: isoliamo le prime due lettere eliminando dialetti (-IT) o pesi (,en)
+        const shortLang = browserLang.toLowerCase().replace(/[^a-z]/g, '').substring(0, 2);
+        console.log("i18n Debug: Stringa pulita ed elaborata dallo script ->", shortLang);
+
+        if (supportedLanguages.includes(shortLang)) {
+            return shortLang;
+        }
+    }
+
+    // 3. Fallback estremo
+    console.warn("i18n Debug: Nessuna lingua valida rilevata. Fallback forzato su 'en'");
+    return 'en';
+}
+
+// ── SISTEMA DI INTERNAZIONALIZZAZIONE (i18n) ──────────────
+function updateLanguage(lang) {
+    if (typeof translations === 'undefined') {
+        console.error("Dizionario 'translations' non caricato. Controlla translations.js");
+        return;
+    }
+
+    // Salviamo immediatamente la scelta per garantire la persistenza globale
+    localStorage.setItem('preferred_lang', lang);
+
+    // 1. Aggiorna tutti gli elementi con attributo data-i18n direttamente qui dentro
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+
+    // 2. Aggiorna l'array locale delle memorie per l'Easter Egg coerentemente con la lingua
+    if (translations[lang] && translations[lang].memories) {
+        memories.length = 0; 
+        memories.push(...translations[lang].memories);
+    }
+
+    // 3. Gestione, distruzione e reset sicuro di Typed.js per evitare sovrapposizioni di scritte
+    if (typedInstance) {
+        typedInstance.destroy();
+    }
+
+    const currentRoles = translations[lang].roles || translations['en'].roles;
+
+    typedInstance = new Typed('.multiple-text', {
+        strings: currentRoles,
+        typeSpeed: 100,
+        backSpeed: 100,
+        backDelay: 1000,
+        loop: true,
+        preStringTyped: function(arrayPos) {
+            const vowelFixEl = document.getElementById('vowel-fix');
+            if (!vowelFixEl) return;
+
+            if (lang === 'en') {
+                vowelFixEl.textContent = arrayPos === 4 ? 'an' : 'a';
+                vowelFixEl.style.display = 'inline';
+            } else if (lang === 'it') {
+                vowelFixEl.textContent = (arrayPos === 2 || arrayPos === 4) ? 'uno' : 'un';
+                vowelFixEl.style.display = 'inline';
+            } else {
+                vowelFixEl.style.display = 'none'; 
+            }
+        }
+    });
+}
+
 // ── NAVBAR SCROLL E MENU ──────────────────────────────────
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 let isMenuOpen = false;
 
-menuIcon.onclick = () => {
-    menuIcon.classList.toggle('bx-x');
-    navbar.classList.toggle('active');
-    isMenuOpen = !isMenuOpen;
-};
+if (menuIcon) {
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+        isMenuOpen = !isMenuOpen;
+    };
+}
 
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
@@ -55,8 +147,11 @@ window.onscroll = () => {
             if (activeLink) activeLink.classList.add('active');
         }
     });
-    document.querySelector('header').classList.toggle('sticky', window.scrollY > 100);
-    if (isMenuOpen) {
+    
+    const headerEl = document.querySelector('header');
+    if (headerEl) headerEl.classList.toggle('sticky', window.scrollY > 100);
+    
+    if (isMenuOpen && menuIcon && navbar) {
         menuIcon.classList.remove('bx-x');
         navbar.classList.remove('active');
         isMenuOpen = false;
@@ -64,8 +159,6 @@ window.onscroll = () => {
 };
 
 // ── UTILITY PER IL GLITCH ─────────────────────────────────
-// Applica il glitch solo ai contenuti e non al body, 
-// per non rompere il "position: fixed" dell'overlay a tutto schermo.
 function toggleGlitch(enable) {
     const elementsToGlitch = document.querySelectorAll('header, section, footer');
     elementsToGlitch.forEach(el => {
@@ -166,7 +259,14 @@ function triggerTombRaider() {
 
 function triggerSimsMood() {
     document.querySelectorAll('#sims-plumbob-el, #sims-badge-el').forEach(el => el.remove());
-    const mood = simsMoods[Math.floor(Math.random() * simsMoods.length)];
+    
+    const currentLang = localStorage.getItem('preferred_lang') || 'en';
+    
+    const moodsSource = (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang].simsMoods) 
+                        ? translations[currentLang].simsMoods 
+                        : simsMoods;
+    
+    const mood = moodsSource[Math.floor(Math.random() * moodsSource.length)];
     const imgWrapper = document.querySelector('.about-img');
     if (!imgWrapper) return;
 
@@ -212,12 +312,10 @@ function unlockAchievement(id) {
     }, 4000);
 }
 
-// ── INITIALIZATION (QUI MANCAVA LA CHIUSURA!) ─────────────
+// ── INITIALIZATION (Punto di Sincronizzazione Critico) ────
 document.addEventListener("DOMContentLoaded", function () {
-    
-        let unlocked = JSON.parse(localStorage.getItem('portfolio_achievements')) || {};
+    let unlocked = JSON.parse(localStorage.getItem('portfolio_achievements')) || {};
     if (unlocked.tombRaider) tombRaiderFound = true;
-
 
     if (typeof ScrollReveal !== 'undefined') {
         ScrollReveal({ distance: '80px', duration: 2000, delay: 200 });
@@ -244,23 +342,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.querySelectorAll('.services-box').forEach(box => {
-    let pressTimer = null;
-
-    box.addEventListener('touchstart', () => {
-        pressTimer = setTimeout(() => {
-            unlockAchievement('isaac');
-            toggleGlitch(true);
-            setTimeout(() => {
-                showOverlay("Something's wrong...", false, "I found pills");
-                toggleGlitch(false);
-            }, 2000);
-        }, 1200);
+        let pressTimer = null;
+        box.addEventListener('touchstart', () => {
+            pressTimer = setTimeout(() => {
+                unlockAchievement('isaac');
+                toggleGlitch(true);
+                setTimeout(() => {
+                    showOverlay("Something's wrong...", false, "I found pills");
+                    toggleGlitch(false);
+                }, 2000);
+            }, 1200);
+        });
+        box.addEventListener('touchend', () => clearTimeout(pressTimer));
+        box.addEventListener('touchmove', () => clearTimeout(pressTimer));
     });
-
-    box.addEventListener('touchend', () => clearTimeout(pressTimer));
-    box.addEventListener('touchmove', () => clearTimeout(pressTimer));
-});
-
 
     const aboutImg = document.querySelector('.about-img img');
     if (aboutImg) {
@@ -268,9 +363,58 @@ document.addEventListener("DOMContentLoaded", function () {
         aboutImg.addEventListener("click", (e) => { e.stopPropagation(); triggerSimsMood(); });
     }
 
+    // ── GESTIONE TENDINA LINGUA CUSTOM DROPDOWN ────────────────
+    const dropdown = document.getElementById('lang-dropdown');
+    const initialLang = getInitialLanguage();
+
+    if (dropdown) {
+        const selectedBtn = dropdown.querySelector('.dropdown-selected');
+        const selectedFlag = dropdown.querySelector('.selected-flag');
+        const selectedText = dropdown.querySelector('.selected-text');
+        const options = dropdown.querySelectorAll('.dropdown-options li');
+
+        function syncDropdownUI(lang) {
+            options.forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('data-value') === lang) {
+                    opt.classList.add('active');
+                    const content = opt.textContent.trim().split(' ');
+                    if (selectedFlag) selectedFlag.textContent = content[0];
+                    if (selectedText) selectedText.textContent = content[1];
+                }
+            });
+        }
+
+        selectedBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const targetLang = this.getAttribute('data-value');
+                
+                updateLanguage(targetLang);
+                syncDropdownUI(targetLang);
+                
+                dropdown.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('active');
+        });
+
+        // Forza la sincronizzazione grafica all'avvio leggendo dal valore iniziale validato
+        syncDropdownUI(initialLang);
+    }
+
+    // Forza il caricamento del dizionario corretto dei testi ed inizializza Typed.js
+    updateLanguage(initialLang);
 
     setPortfolioBoxHeight();
-}); // <-- QUESTA È LA PARENTESI CHE MANCAVA E ROMPEVA TUTTO
+}); 
 
 // ── LAYOUT UTILITIES ──────────────────────────────────────
 window.addEventListener('load', setPortfolioBoxHeight);

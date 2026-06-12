@@ -1,4 +1,57 @@
 // ─────────────────────────────────────────────
+// INTERNATIONALLIZATION ENGINE (i18n)
+// ─────────────────────────────────────────────
+
+// Rileva la lingua iniziale basandosi sul salvataggio precedente o sul browser
+function getInitialLanguage() {
+    const savedLang = localStorage.getItem('preferred_lang');
+    if (savedLang) return savedLang;
+
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang) {
+        const shortLang = browserLang.toLowerCase().split('-')[0];
+        const supportedLanguages = ['en', 'it', 'fr', 'es'];
+        if (supportedLanguages.includes(shortLang)) {
+            return shortLang;
+        }
+    }
+    return 'en';
+}
+
+// Applica i testi alle sotto-pagine leggendo l'attributo data-i18n
+function applyProjectTranslations(lang) {
+    if (typeof translations === 'undefined') {
+        console.error("[i18n] Dizionario 'translations' non trovato. Verifica il caricamento di translations.js");
+        return;
+    }
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+}
+
+// Inizializzazione della lingua al caricamento del DOM
+document.addEventListener("DOMContentLoaded", () => {
+    const langSelector = document.getElementById('language-selector');
+    const initialLang = getInitialLanguage();
+    
+    if (langSelector) {
+        langSelector.value = initialLang;
+        langSelector.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            applyProjectTranslations(selectedLang);
+            localStorage.setItem('preferred_lang', selectedLang);
+        });
+    }
+
+    applyProjectTranslations(initialLang);
+    console.log(`[i18n] Localization initialized with language: ${initialLang}`);
+});
+
+// ─────────────────────────────────────────────
 // NAVIGATION & MOBILE MENU
 // ─────────────────────────────────────────────
 let menuIcon = document.querySelector('#menu-icon');
@@ -50,4 +103,4 @@ window.onscroll = () => {
     }
 };
 
-console.log('[Project Layout] Global navigation engine ready.');
+console.log('[Project Layout] Global navigation and translation engine ready.');

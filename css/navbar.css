@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. STRUTTURA BASE E LAYOUT ORIGINALE (DESKTOP)
+   ========================================================================== */
 .header {
     position: fixed;
     top: 0;
@@ -24,6 +27,7 @@
 
 .navbar {
     display: flex;
+    align-items: center; /* Centra verticalmente link e dropdown su desktop */
     gap: 3rem;
 }
 
@@ -45,7 +49,112 @@
     z-index: 1001;
 }
 
-/* mobile */
+/* ==========================================================================
+   2. DROPDOWN LINGUA CUSTOM (STILE ED ELEMENTI)
+   ========================================================================== */
+.custom-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 2rem;
+    font-family: inherit;
+    user-select: none;
+    z-index: 1000;
+    vertical-align: middle; 
+}
+
+/* Il pulsante principale visibile */
+.dropdown-selected {
+    background: #1f242d;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    
+    /* Dimensioni fisse per evitare anomalie con i font delle emoji */
+    height: 36px !important; 
+    box-sizing: border-box !important;
+    line-height: 1 !important; 
+}
+
+.dropdown-selected:hover {
+    border-color: var(--main-color, #00eeff);
+    box-shadow: 0 0 10px rgba(0, 238, 255, 0.2);
+}
+
+.dropdown-arrow {
+    font-size: 1.6rem;
+    color: var(--main-color, #00eeff);
+    transition: transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* La lista delle opzioni nascosta */
+.dropdown-options {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    min-width: 110px;
+    background: #1f242d;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+/* Stato aperto della tendina delle lingue */
+.custom-dropdown.active .dropdown-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Singola voce della lista */
+.dropdown-options li {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.dropdown-options li:hover {
+    background: rgba(0, 238, 255, 0.1);
+    color: var(--main-color, #00eeff);
+}
+
+.dropdown-options li.active {
+    color: var(--main-color, #00eeff);
+    background: rgba(0, 238, 255, 0.05);
+}
+
+/* ==========================================================================
+   3. RESPONSIVE & MOBILE (LOGICHE RESTRITTIVE SOTTO I 768PX)
+   ========================================================================== */
 @media (max-width: 768px) {
     #menu-icon {
         display: block;
@@ -56,14 +165,48 @@
         top: 100%;
         left: 0;
         width: 100%;
-        flex-direction: column;
-        background: var(--bg-color);
-        display: none;
         padding: 2rem;
+        background: var(--bg-color, #1f242d);
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
         z-index: 999;
+        
+        /* Ripristiniamo il comportamento a scomparsa nativo del tuo sito */
+        display: none; 
+        gap: 0; /* Gestiamo lo spazio sui link via margin per non rompere il flex */
     }
 
+    /* Il menu si mostra SOLO quando riceve la classe .active da JS */
     .navbar.active {
-        display: flex;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important; 
+    }
+
+    /* Sistema le spaziature dei link verticali */
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 1.5rem 0;
+    }
+
+    /* Adattamento del Dropdown Lingua nel pannello mobile */
+    .custom-dropdown {
+        margin-left: 0 !important;
+        margin-top: 1rem !important;  /* Distanza simmetrica sotto l'ultimo link */
+        width: 110px !important;       /* Larghezza fissa per non farlo spaginare */
+        display: flex !important;
+    }
+
+    .dropdown-selected {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+    
+    /* Sposta l'apertura verso l'alto per evitare scroll infiniti a fondo pagina */
+    .dropdown-options {
+        position: absolute;
+        top: auto !important;
+        bottom: calc(100% + 0.5rem) !important; 
     }
 }
