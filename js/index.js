@@ -141,6 +141,12 @@ window.addEventListener("scroll", () => {
 });
 
 function triggerTombRaider() {
+    let unlocked = JSON.parse(localStorage.getItem('portfolio_achievements')) || {};
+    if (unlocked.tombRaider) {
+        tombRaiderFound = true;
+        return;
+    }
+
     const secretSound = new Audio('audio/tr2-secret.mp3');
     secretSound.volume = 0.5;
     secretSound.play().catch(() => {});
@@ -209,6 +215,10 @@ function unlockAchievement(id) {
 // ── INITIALIZATION (QUI MANCAVA LA CHIUSURA!) ─────────────
 document.addEventListener("DOMContentLoaded", function () {
     
+        let unlocked = JSON.parse(localStorage.getItem('portfolio_achievements')) || {};
+    if (unlocked.tombRaider) tombRaiderFound = true;
+
+
     if (typeof ScrollReveal !== 'undefined') {
         ScrollReveal({ distance: '80px', duration: 2000, delay: 200 });
         ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
@@ -232,6 +242,25 @@ document.addEventListener("DOMContentLoaded", function () {
             unlockAchievement('khMemory');
         });
     });
+
+    document.querySelectorAll('.services-box').forEach(box => {
+    let pressTimer = null;
+
+    box.addEventListener('touchstart', () => {
+        pressTimer = setTimeout(() => {
+            unlockAchievement('isaac');
+            toggleGlitch(true);
+            setTimeout(() => {
+                showOverlay("Something's wrong...", false, "I found pills");
+                toggleGlitch(false);
+            }, 2000);
+        }, 1200);
+    });
+
+    box.addEventListener('touchend', () => clearTimeout(pressTimer));
+    box.addEventListener('touchmove', () => clearTimeout(pressTimer));
+});
+
 
     const aboutImg = document.querySelector('.about-img img');
     if (aboutImg) {

@@ -172,6 +172,7 @@ span { color: var(--main-color); }
     .about { flex-direction: column-reverse; }
     .portfolio-container { grid-template-columns: repeat(2, 1fr); }
     .services-box .skill-desc { max-height: 12rem; opacity: 1; }
+      .services-container .services-box { max-width: 100%; flex-basis: 100%; }
     .timeline { padding-left: 1.6rem; }
 }
 @media (max-width: 617px) { .portfolio-container { grid-template-columns: 1fr; } }
